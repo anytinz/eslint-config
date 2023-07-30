@@ -57,9 +57,6 @@ importers:
 
   packages/eslint-config:
     dependencies:
-      '@anytinz/eslint-plugin':
-        specifier: workspace:*
-        version: link:../eslint-plugin
       '@anytinz/eslint-shared':
         specifier: workspace:*
         version: link:../eslint-shared

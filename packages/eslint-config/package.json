@@ -9,7 +9,6 @@
   },
   "exports": "./src/index.js",
   "dependencies": {
-    "@anytinz/eslint-plugin": "workspace:*",
     "@anytinz/eslint-shared": "workspace:*",
     "confusing-browser-globals": "^1.0.11"
   },
