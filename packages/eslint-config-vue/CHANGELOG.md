@@ -1,5 +1,11 @@
 # @anytinz/eslint-config-vue
 
+## 1.0.1
+
+### Patch Changes
+
+- correct private file references
+
 ## 1.0.0
 
 ### Major Changes
