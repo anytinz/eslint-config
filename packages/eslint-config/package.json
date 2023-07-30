@@ -8,8 +8,10 @@
     "url": "https://github.com/anytinz/eslint-config.git"
   },
   "exports": "./src/index.js",
+  "files": [
+    "src"
+  ],
   "dependencies": {
-    "@anytinz/eslint-plugin": "workspace:*",
     "@anytinz/eslint-shared": "workspace:*",
     "confusing-browser-globals": "^1.0.11"
   },
