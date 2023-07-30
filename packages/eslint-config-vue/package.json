@@ -7,7 +7,7 @@
     "type": "git",
     "url": "https://github.com/anytinz/eslint-config.git"
   },
-  "main": "./src/index.js",
+  "exports": "./src/index.js",
   "dependencies": {
     "@anytinz/eslint-shared": "workspace:*",
     "eslint-plugin-vue": "^9.16.0",
