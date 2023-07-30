@@ -1,0 +1,31 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "paths": {
+      "@anytinz/eslint-plugin": ["./packages/eslint-plugin/src/index.ts"],
+      "@anytinz/eslint-plugin/*": ["./packages/eslint-plugin/src/*"]
+    },
+    "types": [
+      "vitest/importMeta"
+    ],
+    "allowImportingTsExtensions": true,
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "noEmit": true,
+    "newLine": "lf",
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "skipLibCheck": true
+  },
+  "include": [
+    "./packages/**/src",
+    "./**/.eslintrc.cjs",
+    "./**/rollup.config.ts",
+    "./vitest.config.ts"
+  ],
+}
