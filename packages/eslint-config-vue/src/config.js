@@ -1,6 +1,6 @@
 import { javascriptConfig, typescriptConfig, typescriptRules } from '@anytinz/eslint-config'
 import { isTypescriptAvailable } from '@anytinz/eslint-shared'
-import typescriptParser from '@typescript-eslint/parser/dist/index.js'
+import typescriptParser from '@typescript-eslint/parser'
 import importPlugin from 'eslint-plugin-import'
 import vuePlugin from 'eslint-plugin-vue'
 import * as espree from 'espree'
