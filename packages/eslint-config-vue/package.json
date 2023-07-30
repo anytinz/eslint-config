@@ -1,0 +1,16 @@
+{
+  "name": "@anytinz/eslint-config-vue",
+  "version": "0.0.0",
+  "license": "MIT",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/anytinz/eslint-config.git"
+  },
+  "main": "./src/index.js",
+  "dependencies": {
+    "@anytinz/eslint-shared": "workspace:*",
+    "eslint-plugin-vue": "^9.16.0",
+    "vue-eslint-parser": "^9.3.1"
+  }
+}

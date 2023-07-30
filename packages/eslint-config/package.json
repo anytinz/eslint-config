@@ -1,0 +1,19 @@
+{
+  "name": "@anytinz/eslint-config",
+  "version": "0.0.0",
+  "license": "MIT",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/anytinz/eslint-config.git"
+  },
+  "exports": "./src/index.js",
+  "dependencies": {
+    "@anytinz/eslint-plugin": "workspace:*",
+    "@anytinz/eslint-shared": "workspace:*",
+    "confusing-browser-globals": "^1.0.11"
+  },
+  "devDependencies": {
+    "eslint-import-resolver-typescript": "^3.5.5"
+  }
+}
