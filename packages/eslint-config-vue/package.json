@@ -12,8 +12,13 @@
     "src"
   ],
   "dependencies": {
+    "@anytinz/eslint-config": "workspace:*",
     "@anytinz/eslint-shared": "workspace:*",
+    "@typescript-eslint/parser": "^6.2.0",
+    "eslint-plugin-import": "^2.28.0",
     "eslint-plugin-vue": "^9.16.0",
+    "espree": "^9.6.1",
+    "globals": "^13.20.0",
     "vue-eslint-parser": "^9.3.1"
   }
 }

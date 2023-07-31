@@ -16,5 +16,8 @@
     "build": "pnpm run clean && rollup --config rollup.config.ts --configPlugin rollup-plugin-esbuild",
     "lint": "eslint src",
     "lint:fix": "eslint --fix"
+  },
+  "dependencies": {
+    "@typescript-eslint/utils": "^6.2.0"
   }
 }
