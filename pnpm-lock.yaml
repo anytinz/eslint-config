@@ -7,25 +7,6 @@ settings:
 importers:
 
   .:
-    dependencies:
-      '@typescript-eslint/eslint-plugin':
-        specifier: ^6.2.0
-        version: 6.2.0(@typescript-eslint/parser@6.2.0)(eslint@8.46.0)(typescript@5.1.6)
-      '@typescript-eslint/parser':
-        specifier: ^6.2.0
-        version: 6.2.0(eslint@8.46.0)(typescript@5.1.6)
-      '@typescript-eslint/utils':
-        specifier: ^6.2.0
-        version: 6.2.0(eslint@8.46.0)(typescript@5.1.6)
-      eslint-plugin-import:
-        specifier: ^2.28.0
-        version: 2.28.0(@typescript-eslint/parser@6.2.0)(eslint-import-resolver-typescript@3.5.5)(eslint@8.46.0)
-      espree:
-        specifier: ^9.6.1
-        version: 9.6.1
-      globals:
-        specifier: ^13.20.0
-        version: 13.20.0
     devDependencies:
       '@anytinz/eslint-config':
         specifier: workspace:*
@@ -63,9 +44,21 @@ importers:
       '@anytinz/eslint-shared':
         specifier: workspace:*
         version: link:../eslint-shared
+      '@typescript-eslint/eslint-plugin':
+        specifier: ^6.2.0
+        version: 6.2.0(@typescript-eslint/parser@6.2.0)(eslint@8.46.0)(typescript@5.1.6)
+      '@typescript-eslint/parser':
+        specifier: ^6.2.0
+        version: 6.2.0(eslint@8.46.0)(typescript@5.1.6)
       confusing-browser-globals:
         specifier: ^1.0.11
         version: 1.0.11
+      eslint-plugin-import:
+        specifier: ^2.28.0
+        version: 2.28.0(@typescript-eslint/parser@6.2.0)(eslint-import-resolver-typescript@3.5.5)(eslint@8.46.0)
+      globals:
+        specifier: ^13.20.0
+        version: 13.20.0
     devDependencies:
       eslint-import-resolver-typescript:
         specifier: ^3.5.5
@@ -73,17 +66,36 @@ importers:
 
   packages/eslint-config-vue:
     dependencies:
+      '@anytinz/eslint-config':
+        specifier: workspace:*
+        version: link:../eslint-config
       '@anytinz/eslint-shared':
         specifier: workspace:*
         version: link:../eslint-shared
+      '@typescript-eslint/parser':
+        specifier: ^6.2.0
+        version: 6.2.0(eslint@8.46.0)(typescript@5.1.6)
+      eslint-plugin-import:
+        specifier: ^2.28.0
+        version: 2.28.0(@typescript-eslint/parser@6.2.0)(eslint-import-resolver-typescript@3.5.5)(eslint@8.46.0)
       eslint-plugin-vue:
         specifier: ^9.16.0
         version: 9.16.0(eslint@8.46.0)
+      espree:
+        specifier: ^9.6.1
+        version: 9.6.1
+      globals:
+        specifier: ^13.20.0
+        version: 13.20.0
       vue-eslint-parser:
         specifier: ^9.3.1
         version: 9.3.1(eslint@8.46.0)
 
-  packages/eslint-plugin: {}
+  packages/eslint-plugin:
+    dependencies:
+      '@typescript-eslint/utils':
+        specifier: ^6.2.0
+        version: 6.2.0(eslint@8.46.0)(typescript@5.1.6)
 
   packages/eslint-shared:
     dependencies:
