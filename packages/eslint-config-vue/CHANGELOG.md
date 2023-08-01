@@ -1,5 +1,13 @@
 # @anytinz/eslint-config-vue
 
+## 1.0.2
+
+### Patch Changes
+
+- 6c59eda: fix: dependency references
+- Updated dependencies [6c59eda]
+  - @anytinz/eslint-config@1.0.1
+
 ## 1.0.1
 
 ### Patch Changes
