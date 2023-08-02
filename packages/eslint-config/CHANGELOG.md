@@ -1,5 +1,11 @@
 # @anytinz/eslint-config
 
+## 1.0.2
+
+### Patch Changes
+
+- 6cac820: incorrectly declared deps
+
 ## 1.0.1
 
 ### Patch Changes
