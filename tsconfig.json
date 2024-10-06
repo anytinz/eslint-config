@@ -1,31 +1,38 @@
 {
   "compilerOptions": {
+    /* Language and Environment */
     "target": "ESNext",
+    /* Module */
     "module": "ESNext",
-    "moduleResolution": "bundler",
-    "paths": {
-      "@anytinz/eslint-plugin": ["./packages/eslint-plugin/src/index.ts"],
-      "@anytinz/eslint-plugin/*": ["./packages/eslint-plugin/src/*"]
-    },
-    "types": [
-      "vitest/importMeta"
-    ],
-    "allowImportingTsExtensions": true,
+    "moduleResolution": "Bundler",
+    "rootDir": "./",
+    /* Emit */
     "declaration": true,
     "declarationMap": true,
+    "declarationDir": "./dist",
     "sourceMap": true,
     "noEmit": true,
     "newLine": "lf",
+    /* Interop Constraints */
+    "isolatedModules": true,
+    "verbatimModuleSyntax": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
+    /* Type Checking */
     "strict": true,
-    "skipLibCheck": true
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedIndexedAccess": true,
+    /* Completeness */
+    "skipLibCheck": true,
+    /* Output Formatting */
+    "noErrorTruncation": true
   },
   "include": [
-    "./packages/**/src",
-    "./**/.eslintrc.cjs",
-    "./**/rollup.config.ts",
-    "./vitest.config.ts"
+    "./scripts",
+    "./src"
   ],
+  "exclude": [
+    "./node_modules"
+  ]
 }

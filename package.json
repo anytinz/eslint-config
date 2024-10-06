@@ -1,26 +1,74 @@
 {
-  "name": "@anytinz/eslint-config-monorepo",
-  "version": "0.0.0",
-  "license": "MIT",
-  "type": "module",
+  "name": "@anytinz/eslint-config",
+  "version": "2.0.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/anytinz/eslint-config.git"
   },
+  "license": "MIT",
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./rules/*": {
+      "types": "./src/types/rules/*.d.ts"
+    }
+  },
+  "files": [
+    "./dist",
+    "./src"
+  ],
   "scripts": {
-    "test": "pnpm vitest"
+    "build": "pnpm run clean && rollup -c rollup.config.js",
+    "clean": "rimraf dist",
+    "gen:rules-type": "rimraf 'src/types/rules/!(javascript.d.ts)' && node --import @swc-node/register/esm-register ./scripts/gen-rules-type.ts",
+    "lint": "eslint .",
+    "prepare": "pnpm run gen:rules-type && pnpm run build"
+  },
+  "dependencies": {
+    "@stylistic/eslint-plugin": "2.9.0",
+    "@typescript-eslint/eslint-plugin": "8.8.0",
+    "@typescript-eslint/parser": "8.8.0",
+    "confusing-browser-globals": "1.0.11",
+    "eslint-import-resolver-node": "0.3.9",
+    "eslint-import-resolver-typescript": "3.6.3",
+    "eslint-plugin-eslint-comments": "3.2.0",
+    "eslint-plugin-import-x": "4.3.1",
+    "eslint-plugin-jsonc": "2.16.0",
+    "eslint-plugin-n": "17.10.3",
+    "eslint-plugin-perfectionist": "3.8.0",
+    "eslint-plugin-solid": "0.14.3",
+    "eslint-plugin-tailwindcss": "3.17.4",
+    "eslint-plugin-unicorn": "56.0.0",
+    "eslint-plugin-vue": "9.28.0",
+    "globals": "15.10.0",
+    "jsonc-eslint-parser": "2.4.0",
+    "sort-package-json": "2.10.1",
+    "vue-eslint-parser": "9.4.3"
   },
   "devDependencies": {
-    "@anytinz/eslint-config": "workspace:*",
-    "@changesets/cli": "^2.26.2",
-    "@rollup/plugin-typescript": "^11.1.2",
-    "@types/eslint": "^8.44.1",
-    "eslint": "^8.46.0",
-    "rimraf": "^5.0.1",
-    "rollup": "^3.27.0",
-    "typescript": "^5.1.6",
-    "vite-tsconfig-paths": "^4.2.0",
-    "vitest": "^0.33.0"
+    "@anytinz/eslint-config": "link:",
+    "@changesets/cli": "2.27.8",
+    "@rollup/plugin-typescript": "12.1.0",
+    "@swc-node/register": "1.10.9",
+    "@types/confusing-browser-globals": "1.0.3",
+    "@types/eslint": "9.6.1",
+    "@types/node": "20.16.10",
+    "change-case": "5.4.4",
+    "eslint": "9.12.0",
+    "eslint-typegen": "0.3.2",
+    "rimraf": "6.0.1",
+    "rollup": "4.24.0",
+    "typescript": "5.6.2"
   },
-  "private": true
+  "peerDependencies": {
+    "eslint": "9.11.1"
+  },
+  "packageManager": "pnpm@9.12.0",
+  "engines": {
+    "node": "20",
+    "pnpm": "9.12.0"
+  }
 }
