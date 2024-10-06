@@ -1,6 +1,6 @@
 {
   "name": "@anytinz/eslint-config",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/anytinz/eslint-config.git"
@@ -64,7 +64,7 @@
     "typescript": "5.6.2"
   },
   "peerDependencies": {
-    "eslint": "9.11.1"
+    "eslint": "9.12.0"
   },
   "packageManager": "pnpm@9.12.0",
   "engines": {
