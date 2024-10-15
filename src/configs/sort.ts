@@ -1,4 +1,3 @@
-import { basename } from 'node:path'
 import { sortPackageJson as _sortPackageJson } from 'sort-package-json'
 import type { Linter, Rule } from 'eslint'
 import type { RuleListener } from 'jsonc-eslint-parser'
@@ -6,7 +5,7 @@ import type { JsoncRules } from '../types/rules/jsonc'
 
 export const sortPackageJson = (): Linter.Config[] => [{
   name: 'anytinz/sort/package-json',
-  files: ['**'],
+  files: ['**/package.json'],
   plugins: {
     'package-json': {
       rules: {
@@ -15,7 +14,6 @@ export const sortPackageJson = (): Linter.Config[] => [{
             fixable: 'code',
           },
           create: (context): Rule.RuleListener => {
-            if (basename(context.filename) !== 'package.json') { return {} }
             const ruleListener: RuleListener = {
               JSONExpressionStatement: (node) => {
                 const { expression: { range } } = node

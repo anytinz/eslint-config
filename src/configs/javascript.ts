@@ -9,7 +9,9 @@ export const resolveJavascriptRules = (): Required<JavascriptRules> => ({
   'array-callback-return': 'error',
   'arrow-body-style': 'off',
   'block-scoped-var': 'error',
-  camelcase: 'error',
+  camelcase: ['error', {
+    properties: 'never',
+  }],
   'capitalized-comments': 'off',
   'class-methods-use-this': 'error',
   complexity: 'off',
@@ -91,7 +93,7 @@ export const resolveJavascriptRules = (): Required<JavascriptRules> => ({
   'no-fallthrough': 'error',
   'no-func-assign': 'error',
   'no-global-assign': 'error',
-  'no-implicit-coercion': 'error',
+  'no-implicit-coercion': ['error', { boolean: false }],
   'no-implicit-globals': 'off',
   'no-implied-eval': 'error',
   'no-import-assign': 'error',
@@ -280,27 +282,14 @@ export const resolveJavascriptRules = (): Required<JavascriptRules> => ({
   'no-useless-return': 'error',
   'no-var': 'error',
   'no-void': ['error', { allowAsStatement: true }],
-  'no-warning-comments': 'error',
+  'no-warning-comments': 'off',
   'no-with': 'error',
   'object-shorthand': 'error',
   'one-var': ['error', 'never'],
   'operator-assignment': 'error',
   'prefer-arrow-callback': 'error',
   'prefer-const': 'error',
-  'prefer-destructuring': [
-    'error',
-    {
-      VariableDeclarator: {
-        array: false,
-        object: true,
-      },
-      AssignmentExpression: {
-        array: true,
-        object: false,
-      },
-    },
-    { enforceForRenamedProperties: true },
-  ],
+  'prefer-destructuring': 'off',
   'prefer-exponentiation-operator': 'error',
   'prefer-named-capture-group': 'error',
   'prefer-numeric-literals': 'error',
@@ -331,33 +320,69 @@ export const resolveJavascriptRules = (): Required<JavascriptRules> => ({
 
 export type JavascriptOptions = CommonOptions<Partial<JavascriptRules>>
 export const javascript = (options: JavascriptOptions = {}): Linter.Config[] => {
-  return [{
-    name: 'anytinz/javascript/rules',
-    languageOptions: {
-      ecmaVersion: 'latest',
-      sourceType: 'module',
-      globals: {
-        ...globals.browser,
-        ...globals.node,
-        ...globals.es2025,
-        document: 'readonly',
-        navigator: 'readonly',
-        window: 'readonly',
-      },
-      parserOptions: {
+  return [
+    {
+      name: 'anytinz/javascript/rules',
+      languageOptions: {
         ecmaVersion: 'latest',
         sourceType: 'module',
-        ecmaFeatures: {
-          jsx: true,
+        globals: {
+          ...globals.browser,
+          ...globals.node,
+          ...globals.es2025,
+          document: 'readonly',
+          navigator: 'readonly',
+          window: 'readonly',
+        },
+        parserOptions: {
+          ecmaVersion: 'latest',
+          sourceType: 'module',
+          ecmaFeatures: {
+            jsx: true,
+          },
         },
       },
+      linterOptions: {
+        reportUnusedDisableDirectives: true,
+      },
+      rules: {
+        ...resolveJavascriptRules(),
+        ...options.overrides,
+      },
     },
-    linterOptions: {
-      reportUnusedDisableDirectives: true,
+    {
+      name: 'anytinz/javascript/overrides/ts',
+      rules: {
+        // recommend disable
+        'no-undef': 'off',
+        // extension rules
+        'class-methods-use-this': 'off',
+        'consistent-return': 'off',
+        'default-param-last': 'off',
+        'dot-notation': 'off',
+        'init-declarations': 'off',
+        'max-params': 'off',
+        'no-array-constructor': 'off',
+        'no-dupe-class-members': 'off',
+        'no-empty-function': 'off',
+        'no-implied-eval': 'off',
+        'no-invalid-this': 'off',
+        'no-loop-func': 'off',
+        'no-loss-of-precision': 'off',
+        'no-magic-numbers': 'off',
+        'no-redeclare': 'off',
+        'no-restricted-imports': 'off',
+        'no-shadow': 'off',
+        'no-throw-literal': 'off',
+        'no-unused-expressions': 'off',
+        'no-unused-vars': 'off',
+        'no-use-before-define': 'off',
+        'no-useless-constructor': 'off',
+        'prefer-destructuring': 'off',
+        'prefer-promise-reject-errors': 'off',
+        'require-await': 'off',
+        'no-return-await': 'off',
+      },
     },
-    rules: {
-      ...resolveJavascriptRules(),
-      ...options.overrides,
-    },
-  }]
+  ]
 }

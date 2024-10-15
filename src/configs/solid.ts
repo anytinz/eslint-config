@@ -1,5 +1,5 @@
 import { GLOB_JSX, GLOB_TSX } from '../globs'
-import { pluginSolid } from '../plugins'
+import { pluginSolid } from '../plugins.js'
 import type { Linter } from 'eslint'
 import type { CommonOptions } from '../types/options'
 import type { SolidRules } from '../types/rules/solid'

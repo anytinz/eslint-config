@@ -1,4 +1,4 @@
-import { pluginEslintComments } from '../plugins'
+import { pluginEslintComments } from '../plugins.js'
 import type { Linter } from 'eslint'
 import type { CommonOptions } from '../types/options'
 import type { EslintCommentsRules } from '../types/rules/eslint-comments'

@@ -1,4 +1,4 @@
-import { pluginUnicorn } from '../plugins'
+import { pluginUnicorn } from '../plugins.js'
 import type { Linter } from 'eslint'
 import type { CommonOptions } from '../types/options'
 import type { UnicornRules } from '../types/rules/unicorn'
@@ -51,7 +51,7 @@ export const resolveUnicornRules = (): Required<UnicornRules> => ({
   'unicorn/no-instanceof-array': 'error',
   'unicorn/no-invalid-fetch-options': 'error',
   'unicorn/no-invalid-remove-event-listener': 'error',
-  'unicorn/no-keyword-prefix': 'error',
+  'unicorn/no-keyword-prefix': 'off',
   'unicorn/no-length-as-slice-end': 'error',
   'unicorn/no-lonely-if': 'error',
   'unicorn/no-magic-array-flat-depth': 'error',
@@ -80,10 +80,17 @@ export const resolveUnicornRules = (): Required<UnicornRules> => ({
   'unicorn/no-useless-promise-resolve-reject': 'error',
   'unicorn/no-useless-spread': 'error',
   'unicorn/no-useless-switch-case': 'error',
-  'unicorn/no-useless-undefined': ['error', { checkArrowFunctionBody: false }],
+  'unicorn/no-useless-undefined': ['error', {
+    checkArguments: false,
+    checkArrowFunctionBody: false,
+  }],
   'unicorn/no-zero-fractions': 'error',
   'unicorn/number-literal-case': 'error',
-  'unicorn/numeric-separators-style': 'error',
+  'unicorn/numeric-separators-style': ['error', {
+    number: {
+      minimumDigits: 0,
+    },
+  }],
   'unicorn/prefer-add-event-listener': 'error',
   'unicorn/prefer-array-find': 'error',
   'unicorn/prefer-array-flat': 'error',
@@ -145,7 +152,7 @@ export const resolveUnicornRules = (): Required<UnicornRules> => ({
   'unicorn/prefer-top-level-await': 'error',
   'unicorn/prefer-trim-start-end': 'off',
   'unicorn/prefer-type-error': 'error',
-  'unicorn/prevent-abbreviations': 'error',
+  'unicorn/prevent-abbreviations': 'off',
   'unicorn/regex-shorthand': 'off',
   'unicorn/relative-url-style': 'error',
   'unicorn/require-array-join-separator': 'error',

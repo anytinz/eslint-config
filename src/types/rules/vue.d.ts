@@ -340,6 +340,11 @@ export interface VueRules {
    */
   'vue/no-deprecated-data-object-declaration'?: Linter.RuleEntry<[]>
   /**
+   * disallow using deprecated `$delete` and `$set` (in Vue.js 3.0.0+)
+   * @see https://eslint.vuejs.org/rules/no-deprecated-delete-set.html
+   */
+  'vue/no-deprecated-delete-set'?: Linter.RuleEntry<[]>
+  /**
    * disallow using deprecated `destroyed` and `beforeDestroy` lifecycle hooks (in Vue.js 3.0.0+)
    * @see https://eslint.vuejs.org/rules/no-deprecated-destroyed-lifecycle.html
    */
