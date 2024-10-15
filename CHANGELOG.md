@@ -1,5 +1,11 @@
 # @anytinz/eslint-config
 
+## 2.2.0
+
+### Minor Changes
+
+- relax rules and add new
+
 ## 2.1.0
 
 ### Minor Changes
