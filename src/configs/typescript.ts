@@ -7,89 +7,46 @@ import { resolveJavascriptRules } from './javascript'
 import type { ParserOptions } from '@typescript-eslint/parser'
 import type { Linter } from 'eslint'
 import type { CommonOptions } from '../types/options'
-import type { JavascriptRules } from '../types/rules/javascript'
 import type { TypescriptRules } from '../types/rules/typescript'
 
-type JavascriptForExtendedRules = {
-  [K in keyof JavascriptRules as `ts/${K}` extends keyof TypescriptRules ? K : never]: 'off'
-}
-type TypescriptExtendedRules = JavascriptForExtendedRules & Pick<TypescriptRules, `ts/${keyof JavascriptForExtendedRules}`>
-export const resolveTypescriptRules = (): Required<JavascriptForExtendedRules & TypescriptRules> => {
+export const resolveTypescriptRules = (): Required<TypescriptRules> => {
   const javascriptRules = resolveJavascriptRules()
-  const extendedRules: Required<TypescriptExtendedRules> = {
-    'class-methods-use-this': 'off',
-    'ts/class-methods-use-this': javascriptRules['class-methods-use-this'],
-
-    'consistent-return': 'off',
+  const extensionRules = {
+    'ts/class-methods-use-this': extendsRuleOptions(javascriptRules['class-methods-use-this'], (...[ruleOptions]) => [{
+      ...ruleOptions,
+      ignoreOverrideMethods: true,
+      ignoreClassesThatImplementAnInterface: 'public-fields' as const,
+    }]),
     'ts/consistent-return': 'off',
-
-    'default-param-last': 'off',
     'ts/default-param-last': javascriptRules['default-param-last'],
-
-    'dot-notation': 'off',
     'ts/dot-notation': javascriptRules['dot-notation'],
-
-    'init-declarations': 'off',
     'ts/init-declarations': javascriptRules['init-declarations'],
-
-    'max-params': 'off',
     'ts/max-params': extendsRuleOptions(javascriptRules['max-params'], (...[ruleOptions]) => (typeof ruleOptions === 'number' ? [{ max: ruleOptions }] : [])),
-
-    'no-array-constructor': 'off',
     'ts/no-array-constructor': javascriptRules['no-array-constructor'],
-
-    'no-dupe-class-members': 'off',
     'ts/no-dupe-class-members': javascriptRules['no-dupe-class-members'],
-
-    'no-empty-function': 'off',
     'ts/no-empty-function': javascriptRules['no-empty-function'],
-
-    'no-implied-eval': 'off',
     'ts/no-implied-eval': javascriptRules['no-implied-eval'],
-
-    'no-invalid-this': 'off',
     'ts/no-invalid-this': javascriptRules['no-invalid-this'],
-
-    'no-loop-func': 'off',
     'ts/no-loop-func': javascriptRules['no-loop-func'],
-
-    'no-loss-of-precision': 'off',
     'ts/no-loss-of-precision': javascriptRules['no-loss-of-precision'],
-
-    'no-magic-numbers': 'off',
     'ts/no-magic-numbers': javascriptRules['no-magic-numbers'],
-
-    'no-redeclare': 'off',
     'ts/no-redeclare': javascriptRules['no-redeclare'],
-
-    'no-restricted-imports': 'off',
     'ts/no-restricted-imports': javascriptRules['no-restricted-imports'],
-
-    'no-shadow': 'off',
     'ts/no-shadow': javascriptRules['no-shadow'],
-
-    'no-unused-expressions': 'off',
     'ts/no-unused-expressions': javascriptRules['no-unused-expressions'],
-
-    'no-unused-vars': 'off',
     'ts/no-unused-vars': javascriptRules['no-unused-vars'],
-
-    'no-use-before-define': 'off',
     'ts/no-use-before-define': javascriptRules['no-use-before-define'],
-
-    'no-useless-constructor': 'off',
     'ts/no-useless-constructor': javascriptRules['no-useless-constructor'],
-
-    'prefer-destructuring': 'off',
+    'ts/only-throw-error': extendsRuleOptions(javascriptRules['no-throw-literal'], () => [{
+      allowThrowingAny: true,
+      allowThrowingUnknown: true,
+    }]),
     'ts/prefer-destructuring': javascriptRules['prefer-destructuring'],
-
-    'prefer-promise-reject-errors': 'off',
     'ts/prefer-promise-reject-errors': javascriptRules['prefer-promise-reject-errors'],
-
-    'require-await': 'off',
     'ts/require-await': javascriptRules['require-await'],
-  }
-  const rules: Required<Omit<TypescriptRules, `ts/${keyof JavascriptForExtendedRules}`>> = {
+    'ts/return-await': javascriptRules['no-return-await'],
+  } as const satisfies Partial<TypescriptRules>
+  const rules: Required<Omit<TypescriptRules, keyof typeof extensionRules>> = {
     'ts/adjacent-overload-signatures': 'error',
     'ts/array-type': 'error',
     'ts/await-thenable': 'error',
@@ -167,10 +124,6 @@ export const resolveTypescriptRules = (): Required<JavascriptForExtendedRules & 
     'ts/no-var-requires': 'error',
     'ts/no-wrapper-object-types': 'error',
     'ts/non-nullable-type-assertion-style': 'error',
-
-    // 'no-throw-literal': 'off',
-    'ts/only-throw-error': ['error', { allowThrowingAny: true, allowThrowingUnknown: true }],
-
     'ts/parameter-properties': 'off',
     'ts/prefer-as-const': 'error',
     'ts/prefer-enum-initializers': 'off',
@@ -193,10 +146,6 @@ export const resolveTypescriptRules = (): Required<JavascriptForExtendedRules & 
     'ts/require-array-sort-compare': 'error',
     'ts/restrict-plus-operands': 'error',
     'ts/restrict-template-expressions': 'error',
-
-    // 'no-return-await': 'off',
-    'ts/return-await': 'error',
-
     'ts/sort-type-constituents': 'off',
     'ts/strict-boolean-expressions': 'error',
     'ts/switch-exhaustiveness-check': 'error',
@@ -208,11 +157,11 @@ export const resolveTypescriptRules = (): Required<JavascriptForExtendedRules & 
   }
   return {
     ...rules,
-    ...extendedRules,
+    ...extensionRules,
   }
 }
 
-export type TypescriptOptions = CommonOptions<Partial<JavascriptForExtendedRules & TypescriptRules>> & {
+export type TypescriptOptions = CommonOptions<Partial<TypescriptRules>> & {
   parserOptions?: ParserOptions
 }
 export const typescript = (options: TypescriptOptions = {}): Linter.Config[] => {
