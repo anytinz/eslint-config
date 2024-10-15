@@ -1,4 +1,4 @@
-import { pluginN } from '../plugins'
+import { pluginN } from '../plugins.js'
 import type { Linter } from 'eslint'
 import type { CommonOptions } from '../types/options'
 import type { NRules } from '../types/rules/n'
@@ -8,7 +8,7 @@ export const resolveNRules = (): Required<NRules> => ({
   'n/exports-style': 'error',
   'n/file-extension-in-import': 'off',
   'n/global-require': 'error',
-  'n/handle-callback-err': ['error', '^(err|error)$'],
+  'n/handle-callback-err': 'off',
   'n/hashbang': 'error',
   'n/no-callback-literal': 'off',
   'n/no-deprecated-api': 'error',

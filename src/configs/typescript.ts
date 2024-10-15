@@ -2,7 +2,7 @@ import { cwd } from 'node:process'
 import parserTypescript from '@typescript-eslint/parser'
 import { GLOB_TS, GLOB_TSX } from '../globs'
 import { extendsRuleOptions } from '../helpers/extends-rule-options'
-import { pluginTypescript } from '../plugins'
+import { pluginTypescript } from '../plugins.js'
 import { resolveJavascriptRules } from './javascript'
 import type { ParserOptions } from '@typescript-eslint/parser'
 import type { Linter } from 'eslint'
@@ -21,7 +21,7 @@ export const resolveTypescriptRules = (): Required<JavascriptForExtendedRules & 
     'ts/class-methods-use-this': javascriptRules['class-methods-use-this'],
 
     'consistent-return': 'off',
-    'ts/consistent-return': javascriptRules['consistent-return'],
+    'ts/consistent-return': 'off',
 
     'default-param-last': 'off',
     'ts/default-param-last': javascriptRules['default-param-last'],

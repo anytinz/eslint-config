@@ -1,6 +1,6 @@
 import parserJsonc from 'jsonc-eslint-parser'
 import { GLOB_JSON, GLOB_JSON5, GLOB_JSONC } from '../globs'
-import { pluginJsonc } from '../plugins'
+import { pluginJsonc } from '../plugins.js'
 import { resolveStylisticRules } from './stylistic'
 import type { Linter } from 'eslint'
 import type { RemovePrefix } from '../helpers/remove-prefix'

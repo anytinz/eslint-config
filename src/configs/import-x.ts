@@ -1,4 +1,4 @@
-import { GLOB_D_TS, GLOB_JS, GLOB_JSX, GLOB_TS, GLOB_TSX } from '../globs'
+import { GLOB_D_TS, GLOB_TS, GLOB_TSX } from '../globs'
 import { pluginImportX } from '../plugins.js'
 import type { Linter } from 'eslint'
 import type { CommonOptions } from '../types/options'
@@ -20,7 +20,9 @@ export const resolveImportXRules = (): Required<ImportXRules> => ({
   'import/newline-after-import': 'error',
   'import/no-absolute-path': 'error',
   'import/no-amd': 'error',
-  'import/no-anonymous-default-export': 'error',
+  'import/no-anonymous-default-export': ['error', {
+    allowCallExpression: false,
+  }],
   'import/no-commonjs': 'error',
   'import/no-cycle': 'error',
   'import/no-default-export': 'error',
@@ -65,7 +67,6 @@ export const importX = (options: ImportXOptions = {}): Linter.Config[] => {
   return [
     {
       name: 'anytinz/import-x/rules',
-      files: [GLOB_JS, GLOB_JSX, GLOB_TS, GLOB_TSX],
       plugins: {
         import: pluginImportX,
       },
@@ -98,7 +99,13 @@ export const importX = (options: ImportXOptions = {}): Linter.Config[] => {
       name: 'anytinz/import-x/overrides/ts',
       files: [GLOB_TS, GLOB_TSX],
       rules: {
-        'import/extensions': 'off',
+        'import/extensions': ['error', 'always', {
+          ts: 'never',
+          cts: 'never',
+          mts: 'never',
+          tsx: 'never',
+        }],
+        'import/named': 'off',
       },
     },
     {

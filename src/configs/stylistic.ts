@@ -1,4 +1,4 @@
-import { pluginStylistic } from '../plugins'
+import { pluginStylistic } from '../plugins.js'
 import type { Linter } from 'eslint'
 import type { CommonOptions } from '../types/options'
 import type { StylisticRules } from '../types/rules/stylistic'
@@ -50,7 +50,7 @@ export const resolveStylisticRules = (): Required<StylisticRules> => ({
   }],
   'style/jsx-curly-newline': ['error', {
     singleline: 'forbid',
-    multiline: 'require',
+    multiline: 'consistent',
   }],
   'style/jsx-curly-spacing': ['error', {
     when: 'never',
@@ -68,16 +68,7 @@ export const resolveStylisticRules = (): Required<StylisticRules> => ({
   'style/jsx-props-no-multi-spaces': 'error',
   'style/jsx-quotes': 'error',
   'style/jsx-self-closing-comp': 'error',
-  'style/jsx-sort-props': ['error', {
-    callbacksLast: true,
-    shorthandFirst: false,
-    shorthandLast: true,
-    multiline: 'ignore',
-    ignoreCase: false,
-    noSortAlphabetically: false,
-    reservedFirst: true,
-    locale: 'auto',
-  }],
+  'style/jsx-sort-props': 'off',
   'style/jsx-tag-spacing': ['error', { beforeClosing: 'never' }],
   'style/jsx-wrap-multilines': ['error', {
     declaration: 'parens-new-line',
@@ -108,7 +99,8 @@ export const resolveStylisticRules = (): Required<StylisticRules> => ({
   'style/newline-per-chained-call': 'error',
   'style/no-confusing-arrow': 'error',
   'style/no-extra-parens': ['error', 'all', {
-    ignoreJSX: 'single-line',
+    nestedBinaryExpressions: false,
+    ignoreJSX: 'multi-line',
     enforceForArrowConditionals: false,
   }],
   'style/no-extra-semi': 'error',
@@ -150,9 +142,13 @@ export const resolveStylisticRules = (): Required<StylisticRules> => ({
   'style/rest-spread-spacing': 'error',
   'style/semi': ['error', 'never'],
   'style/semi-spacing': 'error',
-  'style/semi-style': 'error',
+  'style/semi-style': ['error', 'first'],
   'style/space-before-blocks': 'error',
-  'style/space-before-function-paren': 'error',
+  'style/space-before-function-paren': ['error', {
+    anonymous: 'always',
+    named: 'never',
+    asyncArrow: 'always',
+  }],
   'style/space-in-parens': 'error',
   'style/space-infix-ops': 'error',
   'style/space-unary-ops': 'error',

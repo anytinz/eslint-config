@@ -1,4 +1,4 @@
-import { pluginPerfectionist } from '../plugins'
+import { pluginPerfectionist } from '../plugins.js'
 import type { Linter } from 'eslint'
 import type { CommonOptions } from '../types/options'
 import type { PerfectionistRules } from '../types/rules/perfectionist'
@@ -10,7 +10,6 @@ export const resolvePerfectionistRules = (): Required<PerfectionistRules> => ({
   'perfectionist/sort-enums': 'off',
   'perfectionist/sort-exports': 'off',
   'perfectionist/sort-imports': ['error', {
-    sortSideEffects: true,
     newlinesBetween: 'never',
     groups: [
       'side-effect-style',
@@ -61,6 +60,12 @@ export const perfectionist = (options: PerfectionistOptions = {}): Linter.Config
     rules: {
       ...resolvePerfectionistRules(),
       ...overrides,
+    },
+    settings: {
+      perfectionist: {
+        type: 'natural',
+        ignoreCase: false,
+      },
     },
   }]
 }

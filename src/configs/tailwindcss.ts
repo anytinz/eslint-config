@@ -1,4 +1,4 @@
-import { pluginTailwindcss } from '../plugins'
+import { pluginTailwindcss } from '../plugins.js'
 import type { Linter } from 'eslint'
 import type { CommonOptions } from '../types/options'
 import type { TailwindcssRules } from '../types/rules/tailwindcss'
