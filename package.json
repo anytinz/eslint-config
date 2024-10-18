@@ -29,8 +29,8 @@
   },
   "dependencies": {
     "@stylistic/eslint-plugin": "2.9.0",
-    "@typescript-eslint/eslint-plugin": "8.9.0",
-    "@typescript-eslint/parser": "8.9.0",
+    "@typescript-eslint/eslint-plugin": "8.10.0",
+    "@typescript-eslint/parser": "8.10.0",
     "confusing-browser-globals": "1.0.11",
     "eslint-import-resolver-node": "0.3.9",
     "eslint-import-resolver-typescript": "3.6.3",
@@ -38,7 +38,7 @@
     "eslint-plugin-import-x": "4.3.1",
     "eslint-plugin-jsonc": "2.16.0",
     "eslint-plugin-n": "17.11.1",
-    "eslint-plugin-perfectionist": "3.8.0",
+    "eslint-plugin-perfectionist": "3.9.1",
     "eslint-plugin-solid": "0.14.3",
     "eslint-plugin-tailwindcss": "3.17.5",
     "eslint-plugin-unicorn": "56.0.0",
@@ -51,20 +51,20 @@
   "devDependencies": {
     "@anytinz/eslint-config": "link:",
     "@changesets/cli": "2.27.9",
-    "@rollup/plugin-typescript": "12.1.0",
+    "@rollup/plugin-typescript": "12.1.1",
     "@swc-node/register": "1.10.9",
     "@types/confusing-browser-globals": "1.0.3",
     "@types/eslint": "9.6.1",
-    "@types/node": "20.16.11",
+    "@types/node": "20.16.12",
     "change-case": "5.4.4",
-    "eslint": "9.12.0",
+    "eslint": "9.13.0",
     "eslint-typegen": "0.3.2",
     "rimraf": "6.0.1",
     "rollup": "4.24.0",
     "typescript": "5.6.3"
   },
   "peerDependencies": {
-    "eslint": "9.12.0"
+    "eslint": "9.13.0"
   },
   "packageManager": "pnpm@9.12.0",
   "engines": {
