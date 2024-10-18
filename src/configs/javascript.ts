@@ -1,5 +1,6 @@
 import confusingBrowserGlobals from 'confusing-browser-globals'
 import globals from 'globals'
+import { GLOB_TS, GLOB_TSX } from '../globs'
 import type { Linter } from 'eslint'
 import type { CommonOptions } from '../types/options'
 import type { JavascriptRules } from '../types/rules/javascript'
@@ -352,6 +353,7 @@ export const javascript = (options: JavascriptOptions = {}): Linter.Config[] => 
     },
     {
       name: 'anytinz/javascript/overrides/ts',
+      files: [GLOB_TS, GLOB_TSX],
       rules: {
         // recommend disable
         'no-undef': 'off',
