@@ -1,8 +1,8 @@
 import { writeFile } from 'node:fs/promises'
 import { kebabCase } from 'change-case'
-import { pluginsToRulesDTS } from 'eslint-typegen/core'
 // eslint-disable-next-line import/no-deprecated
 import { builtinRules } from 'eslint/use-at-your-own-risk'
+import { pluginsToRulesDTS } from 'eslint-typegen/core'
 import {
   pluginEslintComments,
   pluginImportX,
@@ -15,7 +15,7 @@ import {
   pluginTypescript,
   pluginUnicorn,
   pluginVue,
-} from '../src/plugins'
+} from '../src/plugins.js'
 import type { ESLint } from 'eslint'
 
 type PluginRecord = {

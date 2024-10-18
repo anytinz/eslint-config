@@ -1,6 +1,6 @@
-import { JavascriptPrimitiveRules } from './javascript-primitive'
-import { StylisticRules } from './stylistic'
-import { NRules } from './n'
 import type { RemovePrefix } from '../../helpers/remove-prefix'
+import type { JavascriptPrimitiveRules } from './javascript-primitive'
+import type { NRules } from './n'
+import type { StylisticRules } from './stylistic'
 
 export type JavascriptRules = Omit<JavascriptPrimitiveRules, RemovePrefix<keyof StylisticRules | keyof NRules, 'style/' | 'n/'>>
