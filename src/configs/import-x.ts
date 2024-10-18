@@ -1,4 +1,4 @@
-import { GLOB_D_TS, GLOB_TS, GLOB_TSX } from '../globs'
+import { GLOB_D_TS, GLOB_JS, GLOB_JSX, GLOB_TS, GLOB_TSX } from '../globs'
 import { pluginImportX } from '../plugins.js'
 import type { Linter } from 'eslint'
 import type { CommonOptions } from '../types/options'
@@ -67,6 +67,7 @@ export const importX = (options: ImportXOptions = {}): Linter.Config[] => {
   return [
     {
       name: 'anytinz/import-x/rules',
+      files: [GLOB_JS, GLOB_JSX, GLOB_TS, GLOB_TSX],
       plugins: {
         import: pluginImportX,
       },
