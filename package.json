@@ -24,8 +24,9 @@
     "build": "pnpm run clean && rollup -c rollup.config.js",
     "clean": "rimraf dist",
     "gen:rules-type": "rimraf 'src/types/rules/!(javascript.d.ts)' && node --import @swc-node/register/esm-register ./scripts/gen-rules-type.ts",
-    "lint": "eslint .",
-    "prepare": "pnpm run gen:rules-type && pnpm run build"
+    "prepare": "pnpm run gen:rules-type && pnpm run build",
+    "test:lint": "eslint .",
+    "test:type": "tsc --noEmit"
   },
   "dependencies": {
     "@stylistic/eslint-plugin": "2.9.0",
