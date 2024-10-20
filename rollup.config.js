@@ -1,7 +1,7 @@
 import typescript from '@rollup/plugin-typescript'
 import { defineConfig } from 'rollup'
 
-export default defineConfig({
+const config = defineConfig({
   input: 'src/index.ts',
   output: {
     dir: './dist',
@@ -33,3 +33,4 @@ export default defineConfig({
     'vue-eslint-parser',
   ],
 })
+export default config

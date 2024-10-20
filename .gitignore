@@ -145,3 +145,7 @@ dist
 
 # PNPM
 .pnpm-store/
+
+# Rules Types
+src/types/rules/*.d.ts
+!src/types/rules/javascript.d.ts
