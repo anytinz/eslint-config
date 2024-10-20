@@ -35,7 +35,7 @@ export const resolveStylisticRules = (): Required<StylisticRules> => ({
   'style/func-call-spacing': 'error',
   'style/function-call-argument-newline': ['error', 'consistent'],
   'style/function-call-spacing': 'error',
-  'style/function-paren-newline': 'error',
+  'style/function-paren-newline': ['error', 'multiline-arguments'],
   'style/generator-star-spacing': ['error', 'after'],
   'style/implicit-arrow-linebreak': 'error',
   'style/indent': ['error', 2],
@@ -96,7 +96,7 @@ export const resolveStylisticRules = (): Required<StylisticRules> => ({
   'style/multiline-comment-style': 'off',
   'style/multiline-ternary': ['error', 'always-multiline'],
   'style/new-parens': 'error',
-  'style/newline-per-chained-call': 'error',
+  'style/newline-per-chained-call': 'off',
   'style/no-confusing-arrow': 'error',
   'style/no-extra-parens': ['error', 'all', {
     nestedBinaryExpressions: false,
