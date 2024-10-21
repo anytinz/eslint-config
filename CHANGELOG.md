@@ -1,5 +1,11 @@
 # @anytinz/eslint-config
 
+## 2.5.0
+
+### Minor Changes
+
+- disable tailwindcss/no-arbitrary-value rule
+
 ## 2.4.1
 
 ### Patch Changes
