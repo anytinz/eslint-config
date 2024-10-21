@@ -1,4 +1,5 @@
 export { anytinz } from './anytinz'
+export type { AnytinzOptions } from './anytinz'
 
 export { eslintComments, resolveEslintCommentsRules } from './configs/comments'
 export type { EslintCommentsOptions } from './configs/comments'
