@@ -50,6 +50,9 @@ importers:
       eslint-plugin-unicorn:
         specifier: 56.0.0
         version: 56.0.0(eslint@9.13.0(jiti@2.3.3))
+      eslint-plugin-vue:
+        specifier: 9.29.1
+        version: 9.29.1(eslint@9.13.0(jiti@2.3.3))
       globals:
         specifier: 15.11.0
         version: 15.11.0
@@ -90,9 +93,6 @@ importers:
       eslint:
         specifier: 9.13.0
         version: 9.13.0(jiti@2.3.3)
-      eslint-plugin-vue:
-        specifier: 9.29.1
-        version: 9.29.1(eslint@9.13.0(jiti@2.3.3))
       eslint-typegen:
         specifier: 0.3.2
         version: 0.3.2(eslint@9.13.0(jiti@2.3.3))

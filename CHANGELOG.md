@@ -1,5 +1,11 @@
 # @anytinz/eslint-config
 
+## 2.4.1
+
+### Patch Changes
+
+- correct eslint-plugin-vue placement
+
 ## 2.4.0
 
 ### Minor Changes
