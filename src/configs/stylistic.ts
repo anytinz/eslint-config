@@ -1,6 +1,6 @@
 import { pluginStylistic } from '../plugins.js'
 import type { Linter } from 'eslint'
-import type { CommonOptions } from '../types/options'
+import type { OverridesOptions } from '../types/options'
 import type { StylisticRules } from '../types/rules/stylistic'
 
 export const resolveStylisticRules = (): Required<StylisticRules> => ({
@@ -179,7 +179,7 @@ export const resolveStylisticRules = (): Required<StylisticRules> => ({
 
 })
 
-export type StylisticOptions = CommonOptions<Partial<StylisticRules>>
+export type StylisticOptions = OverridesOptions<Partial<StylisticRules>>
 export const stylistic = (options: StylisticOptions = {}): Linter.Config[] => {
   return [{
     name: 'anytinz/stylistic/rules',

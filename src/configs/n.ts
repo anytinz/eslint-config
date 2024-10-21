@@ -1,6 +1,6 @@
 import { pluginN } from '../plugins.js'
 import type { Linter } from 'eslint'
-import type { CommonOptions } from '../types/options'
+import type { OverridesOptions } from '../types/options'
 import type { NRules } from '../types/rules/n'
 
 export const resolveNRules = (): Required<NRules> => ({
@@ -46,7 +46,7 @@ export const resolveNRules = (): Required<NRules> => ({
   'n/shebang': 'off',
 })
 
-export type NOptions = CommonOptions<Partial<NRules>>
+export type NOptions = OverridesOptions<Partial<NRules>>
 export const n = (options: NOptions = {}): Linter.Config[] => {
   const { overrides } = options
   return [{

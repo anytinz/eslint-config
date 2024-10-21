@@ -6,7 +6,7 @@ import { pluginTypescript } from '../plugins.js'
 import { resolveJavascriptRules } from './javascript'
 import type { ParserOptions } from '@typescript-eslint/parser'
 import type { Linter } from 'eslint'
-import type { CommonOptions } from '../types/options'
+import type { OverridesOptions } from '../types/options'
 import type { TypescriptRules } from '../types/rules/typescript'
 
 export const resolveTypescriptRules = (): Required<TypescriptRules> => {
@@ -173,7 +173,7 @@ export const resolveTypescriptParserOptions = (): ParserOptions => ({
   tsconfigRootDir: cwd(),
 })
 
-export type TypescriptOptions = CommonOptions<Partial<TypescriptRules>> & {
+export type TypescriptOptions = OverridesOptions<Partial<TypescriptRules>> & {
   parserOptions?: ParserOptions
 }
 export const typescript = (options: TypescriptOptions = {}): Linter.Config[] => {

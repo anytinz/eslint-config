@@ -1,7 +1,7 @@
 import { GLOB_JSX, GLOB_TSX } from '../globs'
 import { pluginSolid } from '../plugins.js'
 import type { Linter } from 'eslint'
-import type { CommonOptions } from '../types/options'
+import type { OverridesOptions } from '../types/options'
 import type { SolidRules } from '../types/rules/solid'
 
 export const resolveSolidRules = (): Required<SolidRules> => ({
@@ -27,7 +27,7 @@ export const resolveSolidRules = (): Required<SolidRules> => ({
   'solid/style-prop': 'error',
 })
 
-export type SolidOptions = CommonOptions<Partial<SolidRules>>
+export type SolidOptions = OverridesOptions<Partial<SolidRules>>
 export const solid = (options: SolidOptions = {}): Linter.Config[] => {
   return [{
     name: 'anytinz/solid/rules',

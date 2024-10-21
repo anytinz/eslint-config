@@ -4,7 +4,7 @@ import { pluginJsonc } from '../plugins.js'
 import { resolveStylisticRules } from './stylistic'
 import type { Linter } from 'eslint'
 import type { RemovePrefix } from '../helpers/remove-prefix'
-import type { CommonOptions } from '../types/options'
+import type { OverridesOptions } from '../types/options'
 import type { JsoncRules } from '../types/rules/jsonc'
 import type { StylisticRules } from '../types/rules/stylistic'
 
@@ -35,7 +35,7 @@ export const resolveJsonStylisticRules = (): Required<JsoncStylisticRules> => {
   return rules
 }
 
-export type JsonOptions = CommonOptions<Partial<JsoncRules>>
+export type JsonOptions = OverridesOptions<Partial<JsoncRules>>
 export const json = (options: JsonOptions = {}): Linter.Config[] => {
   const { overrides } = options
   return [

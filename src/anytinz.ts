@@ -14,7 +14,7 @@ import { unicorn } from './configs/unicorn'
 import { vue } from './configs/vue'
 import type { Linter } from 'eslint'
 import type { TypescriptOptions } from './configs/typescript'
-import type { CommonOptions } from './types/options'
+import type { OverridesOptions } from './types/options'
 
 export type SortOptions = {
   packageJson?: boolean
@@ -37,7 +37,7 @@ const normalizeSortOptions = (options: SortOptions | boolean | undefined): Requi
 
 export type AnytinzOptions = {
   ingores?: string[]
-  typescript?: Omit<TypescriptOptions, keyof CommonOptions<never>> | boolean
+  typescript?: Omit<TypescriptOptions, keyof OverridesOptions<never>> | boolean
   solid?: boolean
   vue?: boolean
   tailwindcss?: boolean

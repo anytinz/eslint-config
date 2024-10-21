@@ -8,7 +8,7 @@ import { resolveJavascriptRules } from './javascript'
 import { resolveStylisticRules } from './stylistic'
 import type { Linter } from 'eslint'
 import type { RemovePrefix } from '../helpers/remove-prefix'
-import type { CommonOptions } from '../types/options'
+import type { OverridesOptions } from '../types/options'
 import type { JavascriptRules } from '../types/rules/javascript'
 import type { StylisticRules } from '../types/rules/stylistic'
 import type { VueRules } from '../types/rules/vue'
@@ -295,7 +295,7 @@ export const resolveVueRules = (): Required<VueRules> => {
     ...rulesExtendsStylistic,
   }
 }
-export type VueOptions = CommonOptions<Partial<VueRules>> & {
+export type VueOptions = OverridesOptions<Partial<VueRules>> & {
   typescript?: boolean
 }
 export const vue = (options: VueOptions = {}): Linter.Config[] => {

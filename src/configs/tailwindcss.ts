@@ -1,6 +1,6 @@
 import { pluginTailwindcss } from '../plugins.js'
 import type { Linter } from 'eslint'
-import type { CommonOptions } from '../types/options'
+import type { OverridesOptions } from '../types/options'
 import type { TailwindcssRules } from '../types/rules/tailwindcss'
 
 export const resolveTailwindcssRules = (): Required<TailwindcssRules> => ({
@@ -14,7 +14,7 @@ export const resolveTailwindcssRules = (): Required<TailwindcssRules> => ({
   'tailwindcss/no-unnecessary-arbitrary-value': 'error',
 })
 
-export type TailwindcssOptions = CommonOptions<Partial<TailwindcssRules>>
+export type TailwindcssOptions = OverridesOptions<Partial<TailwindcssRules>>
 export const tailwindcss = (options: TailwindcssOptions = {}): Linter.Config[] => {
   const { overrides } = options
   return [{
