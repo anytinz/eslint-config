@@ -16,7 +16,8 @@ import type { VueRules } from '../types/rules/vue'
 import type { TypescriptOptions } from './typescript'
 
 type VueRulesExtendsCore = Pick<VueRules, Extract<Exclude<keyof VueRules, 'vue/no-unused-vars'>, `vue/${keyof JavascriptRules}`>>
-type VueRulesExtendsStylistic = Pick<VueRules, Extract<keyof VueRules, `vue/${RemovePrefix<keyof StylisticRules, 'style/'>}`> | (
+type VueRulesExtendsStylistic = Pick<VueRules, (
+  | Extract<keyof VueRules, `vue/${RemovePrefix<keyof StylisticRules, 'style/'>}`>
   | 'vue/html-comment-indent'
   | 'vue/html-indent'
   | 'vue/script-indent'
@@ -318,10 +319,10 @@ export const vue = (options: VueOptions = {}): Linter.Config[] => {
           jsx: true,
         },
         ...typescriptOptions && {
-            parser: parserTypescript,
-            extraFileExtensions: ['.vue'],
+          parser: parserTypescript,
+          extraFileExtensions: ['.vue'],
           ...typescriptOptions,
-            },
+        },
       },
     },
     plugins: {
