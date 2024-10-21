@@ -9,7 +9,7 @@ import { resolveJavascriptRules } from './javascript'
 import { resolveStylisticRules } from './stylistic'
 import type { Linter } from 'eslint'
 import type { RemovePrefix } from '../helpers/remove-prefix'
-import type { OverridesOptions } from '../types/options'
+import type { FilesOptions, OverridesOptions } from '../types/options'
 import type { JavascriptRules } from '../types/rules/javascript'
 import type { StylisticRules } from '../types/rules/stylistic'
 import type { VueRules } from '../types/rules/vue'
@@ -297,17 +297,18 @@ export const resolveVueRules = (): Required<VueRules> => {
     ...rulesExtendsStylistic,
   }
 }
-export type VueOptions = OverridesOptions<Partial<VueRules>> & {
+export type VueOptions = OverridesOptions<Partial<VueRules>> & FilesOptions & {
   typescript?: Omit<TypescriptOptions, keyof OverridesOptions<never>> | boolean
 }
 export const vue = (options: VueOptions = {}): Linter.Config[] => {
   const {
+    files = [GLOB_VUE],
     overrides,
   } = options
   const typescriptOptions = normalizeOptions(options.typescript ?? true)
   return [{
     name: 'anytinz/vue/rules',
-    files: [GLOB_VUE],
+    files,
     languageOptions: {
       parser: parserVue,
       parserOptions: {

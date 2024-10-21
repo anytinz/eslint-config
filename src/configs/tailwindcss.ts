@@ -1,6 +1,7 @@
+import { GLOB_JSX, GLOB_TSX } from '../globs'
 import { pluginTailwindcss } from '../plugins.js'
 import type { Linter } from 'eslint'
-import type { OverridesOptions } from '../types/options'
+import type { FilesOptions, OverridesOptions } from '../types/options'
 import type { TailwindcssRules } from '../types/rules/tailwindcss'
 
 export const resolveTailwindcssRules = (): Required<TailwindcssRules> => ({
@@ -14,11 +15,15 @@ export const resolveTailwindcssRules = (): Required<TailwindcssRules> => ({
   'tailwindcss/no-unnecessary-arbitrary-value': 'error',
 })
 
-export type TailwindcssOptions = OverridesOptions<Partial<TailwindcssRules>>
+export type TailwindcssOptions = OverridesOptions<Partial<TailwindcssRules>> & FilesOptions
 export const tailwindcss = (options: TailwindcssOptions = {}): Linter.Config[] => {
-  const { overrides } = options
+  const {
+    files = [GLOB_JSX, GLOB_TSX],
+    overrides,
+  } = options
   return [{
     name: 'anytinz/tailwindcss/rules',
+    files,
     plugins: {
       tailwindcss: pluginTailwindcss,
     },
