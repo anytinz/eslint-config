@@ -1,5 +1,11 @@
 # @anytinz/eslint-config
 
+## 2.4.0
+
+### Minor Changes
+
+- enhance eslint config with improved options handling
+
 ## 2.3.0
 
 ### Minor Changes
