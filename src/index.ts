@@ -1,4 +1,5 @@
 export { anytinz } from './anytinz'
+export type { AnytinzOptions } from './anytinz'
 
 export { eslintComments, resolveEslintCommentsRules } from './configs/comments'
 export type { EslintCommentsOptions } from './configs/comments'
@@ -27,4 +28,4 @@ export type { UnicornOptions } from './configs/unicorn'
 export { vue, resolveVueRules } from './configs/vue'
 export type { VueOptions } from './configs/vue'
 
-export type { CommonOptions } from './types/options'
+export type { OverridesOptions, FilesOptions } from './types/options'

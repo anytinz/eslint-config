@@ -1,6 +1,6 @@
 import { pluginEslintComments } from '../plugins.js'
 import type { Linter } from 'eslint'
-import type { CommonOptions } from '../types/options'
+import type { OverridesOptions } from '../types/options'
 import type { EslintCommentsRules } from '../types/rules/eslint-comments'
 
 export const resolveEslintCommentsRules = (): Required<EslintCommentsRules> => ({
@@ -15,7 +15,7 @@ export const resolveEslintCommentsRules = (): Required<EslintCommentsRules> => (
   'eslint-comments/require-description': 'off',
 })
 
-export type EslintCommentsOptions = CommonOptions<Partial<EslintCommentsRules>>
+export type EslintCommentsOptions = OverridesOptions<Partial<EslintCommentsRules>>
 export const eslintComments = (options: EslintCommentsOptions = {}): Linter.Config[] => {
   const { overrides } = options
   return [{

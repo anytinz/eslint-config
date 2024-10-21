@@ -1,6 +1,6 @@
 import { pluginUnicorn } from '../plugins.js'
 import type { Linter } from 'eslint'
-import type { CommonOptions } from '../types/options'
+import type { OverridesOptions } from '../types/options'
 import type { UnicornRules } from '../types/rules/unicorn'
 
 export const resolveUnicornRules = (): Required<UnicornRules> => ({
@@ -175,7 +175,7 @@ export const resolveUnicornRules = (): Required<UnicornRules> => ({
   'unicorn/throw-new-error': 'error',
 })
 
-export type UnicornOptions = CommonOptions<Partial<UnicornRules>>
+export type UnicornOptions = OverridesOptions<Partial<UnicornRules>>
 export const unicorn = (options: UnicornOptions = {}): Linter.Config[] => {
   return [{
     name: 'anytinz/unicorn/rules',

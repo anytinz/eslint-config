@@ -3,18 +3,21 @@ import parserTypescript from '@typescript-eslint/parser'
 import parserVue from 'vue-eslint-parser'
 import { GLOB_VUE } from '../globs'
 import { extendsRuleOptions } from '../helpers/extends-rule-options'
+import { normalizeOptions } from '../helpers/normalize-options'
 import { pluginVue } from '../plugins.js'
 import { resolveJavascriptRules } from './javascript'
 import { resolveStylisticRules } from './stylistic'
 import type { Linter } from 'eslint'
 import type { RemovePrefix } from '../helpers/remove-prefix'
-import type { CommonOptions } from '../types/options'
+import type { FilesOptions, OverridesOptions } from '../types/options'
 import type { JavascriptRules } from '../types/rules/javascript'
 import type { StylisticRules } from '../types/rules/stylistic'
 import type { VueRules } from '../types/rules/vue'
+import type { TypescriptOptions } from './typescript'
 
 type VueRulesExtendsCore = Pick<VueRules, Extract<Exclude<keyof VueRules, 'vue/no-unused-vars'>, `vue/${keyof JavascriptRules}`>>
-type VueRulesExtendsStylistic = Pick<VueRules, Extract<keyof VueRules, `vue/${RemovePrefix<keyof StylisticRules, 'style/'>}`> | (
+type VueRulesExtendsStylistic = Pick<VueRules, (
+  | Extract<keyof VueRules, `vue/${RemovePrefix<keyof StylisticRules, 'style/'>}`>
   | 'vue/html-comment-indent'
   | 'vue/html-indent'
   | 'vue/script-indent'
@@ -295,33 +298,31 @@ export const resolveVueRules = (): Required<VueRules> => {
     ...rulesExtendsStylistic,
   }
 }
-export type VueOptions = CommonOptions<Partial<VueRules>> & {
-  typescript?: boolean
+export type VueOptions = OverridesOptions<Partial<VueRules>> & FilesOptions & {
+  typescript?: Omit<TypescriptOptions, keyof OverridesOptions<never>> | boolean
 }
 export const vue = (options: VueOptions = {}): Linter.Config[] => {
   const {
+    files = [GLOB_VUE],
     overrides,
-    typescript: typescriptOptions = true,
   } = options
+  const typescriptOptions = normalizeOptions(options.typescript ?? true)
   return [{
     name: 'anytinz/vue/rules',
-    files: [GLOB_VUE],
+    files,
     languageOptions: {
       parser: parserVue,
       parserOptions: {
+        ecmaVersion: 'latest',
+        sourceType: 'module',
         ecmaFeatures: {
           jsx: true,
         },
-        ...typescriptOptions
-          ? {
-            parser: parserTypescript,
-            extraFileExtensions: ['.vue'],
-            projectService: {
-              allowDefaultProject: ['./*.js'],
-            },
-            tsconfigRootDir: import.meta.dirname,
-          }
-          : undefined,
+        ...typescriptOptions && {
+          parser: parserTypescript,
+          extraFileExtensions: ['.vue'],
+          ...typescriptOptions,
+        },
       },
     },
     plugins: {

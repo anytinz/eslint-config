@@ -2,7 +2,7 @@ import { GLOB_D_TS, GLOB_JS, GLOB_JSX, GLOB_TS, GLOB_TSX } from '../globs'
 import { extendsRuleOptions } from '../helpers/extends-rule-options'
 import { pluginImportX } from '../plugins.js'
 import type { Linter } from 'eslint'
-import type { CommonOptions } from '../types/options'
+import type { OverridesOptions } from '../types/options'
 import type { ImportExtensions, ImportXRules } from '../types/rules/import-x'
 
 export const resolveImportXRules = (): Required<ImportXRules> => ({
@@ -75,7 +75,7 @@ const extendsExtensionsRuleObjOptsForTs = (objOpts?: ImportExtensions[1]): NonNu
 
 const JS_EXTENSIONS = ['.js', '.cjs', '.mjs', '.jsx']
 const TS_EXTENSIONS = ['.ts', '.cts', '.mts', '.tsx']
-export type ImportXOptions = CommonOptions<Partial<ImportXRules>>
+export type ImportXOptions = OverridesOptions<Partial<ImportXRules>>
 export const importX = (options: ImportXOptions = {}): Linter.Config[] => {
   const { overrides } = options
   const importXRules = resolveImportXRules()

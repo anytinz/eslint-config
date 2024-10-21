@@ -1,6 +1,6 @@
 {
   "name": "@anytinz/eslint-config",
-  "version": "2.3.0",
+  "version": "2.4.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/anytinz/eslint-config.git"
@@ -43,7 +43,6 @@
     "eslint-plugin-solid": "0.14.3",
     "eslint-plugin-tailwindcss": "3.17.5",
     "eslint-plugin-unicorn": "56.0.0",
-    "eslint-plugin-vue": "9.29.0",
     "globals": "15.11.0",
     "jsonc-eslint-parser": "2.4.0",
     "sort-package-json": "2.10.1",
@@ -56,9 +55,10 @@
     "@swc-node/register": "1.10.9",
     "@types/confusing-browser-globals": "1.0.3",
     "@types/eslint": "9.6.1",
-    "@types/node": "20.16.12",
+    "@types/node": "20.16.13",
     "change-case": "5.4.4",
     "eslint": "9.13.0",
+    "eslint-plugin-vue": "9.29.1",
     "eslint-typegen": "0.3.2",
     "rimraf": "6.0.1",
     "rollup": "4.24.0",

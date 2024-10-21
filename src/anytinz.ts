@@ -12,9 +12,13 @@ import { tailwindcss } from './configs/tailwindcss'
 import { typescript } from './configs/typescript'
 import { unicorn } from './configs/unicorn'
 import { vue } from './configs/vue'
+import { normalizeOptions } from './helpers/normalize-options'
 import type { Linter } from 'eslint'
+import type { SolidOptions } from './configs/solid'
+import type { TailwindcssOptions } from './configs/tailwindcss'
 import type { TypescriptOptions } from './configs/typescript'
-import type { CommonOptions } from './types/options'
+import type { VueOptions } from './configs/vue'
+import type { OverridesOptions } from './types/options'
 
 export type SortOptions = {
   packageJson?: boolean
@@ -22,9 +26,6 @@ export type SortOptions = {
   devcontainerJson?: boolean
 }
 
-const normalizeOptions = <T extends Partial<Record<PropertyKey, unknown>>>(options: T | boolean | undefined): T | false => {
-  return options === true ? {} as T : options ?? false
-}
 const normalizeSortOptions = (options: SortOptions | boolean | undefined): Required<SortOptions> => {
   if (options === true || options === undefined) { return { packageJson: true, tsconfig: true, devcontainerJson: true } }
   if (options === false) { return { packageJson: false, tsconfig: false, devcontainerJson: false } }
@@ -37,19 +38,17 @@ const normalizeSortOptions = (options: SortOptions | boolean | undefined): Requi
 
 export type AnytinzOptions = {
   ingores?: string[]
-  typescript?: Omit<TypescriptOptions, keyof CommonOptions<never>> | boolean
-  solid?: boolean
-  vue?: boolean
-  tailwindcss?: boolean
+  typescript?: Omit<TypescriptOptions, keyof OverridesOptions<never>> | boolean
+  solid?: Omit<SolidOptions, keyof OverridesOptions<never>> | boolean
+  vue?: Omit<VueOptions, keyof OverridesOptions<never>> | boolean
+  tailwindcss?: Omit<TailwindcssOptions, keyof OverridesOptions<never>> | boolean
   sort?: boolean | Partial<Record<'packageJson' | 'tsconfig', boolean>>
 }
 export const anytinz = (options: AnytinzOptions = {}, ...custom: Linter.Config[]): Linter.Config[] => {
-  const {
-    solid: solidOptions = false,
-    vue: vueOptions = false,
-    tailwindcss: tailwindcssOptions = false,
-  } = options
   const typescriptOptions = normalizeOptions(options.typescript ?? true)
+  const solidOptions = normalizeOptions(options.solid)
+  const vueOptions = normalizeOptions(options.vue)
+  const tailwindcssOptions = normalizeOptions(options.tailwindcss)
   const sortOptions = normalizeSortOptions(options.sort)
   const configs: Linter.Config[] = [
     ...ingores(options.ingores),
@@ -63,14 +62,12 @@ export const anytinz = (options: AnytinzOptions = {}, ...custom: Linter.Config[]
     ...json(),
   ]
 
-  const typescriptParserExtraFileExtensions: string[] = typescriptOptions === false
-    ? []
-    : typescriptOptions.parserOptions?.extraFileExtensions ?? []
+  const typescriptParserExtraFileExtensions: string[] = typescriptOptions?.parserOptions?.extraFileExtensions ?? []
   if (vueOptions) {
     typescriptParserExtraFileExtensions.push('.vue')
   }
 
-  if (typescriptOptions !== false) {
+  if (typescriptOptions) {
     configs.push(...typescript({
       ...typescriptOptions,
       parserOptions: {
@@ -80,10 +77,14 @@ export const anytinz = (options: AnytinzOptions = {}, ...custom: Linter.Config[]
     }))
   }
   if (solidOptions) {
-    configs.push(...solid())
+    configs.push(...solid(solidOptions))
   }
   if (vueOptions) {
-    configs.push(...vue({ typescript: Boolean(typescriptOptions) }))
+    const typescriptOptionsForVue = normalizeOptions(vueOptions.typescript ?? typescriptOptions)
+    configs.push(...vue({
+      ...vueOptions,
+      typescript: typescriptOptionsForVue,
+    }))
   }
   if (tailwindcssOptions) {
     configs.push(...tailwindcss())

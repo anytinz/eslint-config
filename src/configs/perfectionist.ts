@@ -1,6 +1,6 @@
 import { pluginPerfectionist } from '../plugins.js'
 import type { Linter } from 'eslint'
-import type { CommonOptions } from '../types/options'
+import type { OverridesOptions } from '../types/options'
 import type { PerfectionistRules } from '../types/rules/perfectionist'
 
 export const resolvePerfectionistRules = (): Required<PerfectionistRules> => ({
@@ -49,7 +49,7 @@ export const resolvePerfectionistRules = (): Required<PerfectionistRules> => ({
   'perfectionist/sort-vue-attributes': 'off',
 })
 
-export type PerfectionistOptions = CommonOptions<Partial<PerfectionistRules>>
+export type PerfectionistOptions = OverridesOptions<Partial<PerfectionistRules>>
 export const perfectionist = (options: PerfectionistOptions = {}): Linter.Config[] => {
   const { overrides } = options
   return [{

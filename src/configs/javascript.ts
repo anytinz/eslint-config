@@ -2,7 +2,7 @@ import confusingBrowserGlobals from 'confusing-browser-globals'
 import globals from 'globals'
 import { GLOB_TS, GLOB_TSX } from '../globs'
 import type { Linter } from 'eslint'
-import type { CommonOptions } from '../types/options'
+import type { OverridesOptions } from '../types/options'
 import type { JavascriptRules } from '../types/rules/javascript'
 
 export const resolveJavascriptRules = (): Required<JavascriptRules> => ({
@@ -319,7 +319,7 @@ export const resolveJavascriptRules = (): Required<JavascriptRules> => ({
   yoda: 'error',
 })
 
-export type JavascriptOptions = CommonOptions<Partial<JavascriptRules>>
+export type JavascriptOptions = OverridesOptions<Partial<JavascriptRules>>
 export const javascript = (options: JavascriptOptions = {}): Linter.Config[] => {
   return [
     {
