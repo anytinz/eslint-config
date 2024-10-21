@@ -12,6 +12,7 @@ import { tailwindcss } from './configs/tailwindcss'
 import { typescript } from './configs/typescript'
 import { unicorn } from './configs/unicorn'
 import { vue } from './configs/vue'
+import { normalizeOptions } from './helpers/normalize-options'
 import type { Linter } from 'eslint'
 import type { TypescriptOptions } from './configs/typescript'
 import type { OverridesOptions } from './types/options'
@@ -22,9 +23,6 @@ export type SortOptions = {
   devcontainerJson?: boolean
 }
 
-const normalizeOptions = <T extends Partial<Record<PropertyKey, unknown>>>(options: T | boolean | undefined): T | false => {
-  return options === true ? {} as T : options ?? false
-}
 const normalizeSortOptions = (options: SortOptions | boolean | undefined): Required<SortOptions> => {
   if (options === true || options === undefined) { return { packageJson: true, tsconfig: true, devcontainerJson: true } }
   if (options === false) { return { packageJson: false, tsconfig: false, devcontainerJson: false } }
@@ -63,14 +61,12 @@ export const anytinz = (options: AnytinzOptions = {}, ...custom: Linter.Config[]
     ...json(),
   ]
 
-  const typescriptParserExtraFileExtensions: string[] = typescriptOptions === false
-    ? []
-    : typescriptOptions.parserOptions?.extraFileExtensions ?? []
+  const typescriptParserExtraFileExtensions: string[] = typescriptOptions?.parserOptions?.extraFileExtensions ?? []
   if (vueOptions) {
     typescriptParserExtraFileExtensions.push('.vue')
   }
 
-  if (typescriptOptions !== false) {
+  if (typescriptOptions) {
     configs.push(...typescript({
       ...typescriptOptions,
       parserOptions: {
