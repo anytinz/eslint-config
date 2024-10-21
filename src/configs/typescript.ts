@@ -161,6 +161,18 @@ export const resolveTypescriptRules = (): Required<TypescriptRules> => {
   }
 }
 
+export const resolveTypescriptParserOptions = (): ParserOptions => ({
+  ecmaVersion: 'latest',
+  sourceType: 'module',
+  ecmaFeatures: {
+    jsx: true,
+  },
+  projectService: {
+    allowDefaultProject: ['./*.js'],
+  },
+  tsconfigRootDir: cwd(),
+})
+
 export type TypescriptOptions = CommonOptions<Partial<TypescriptRules>> & {
   parserOptions?: ParserOptions
 }
@@ -181,15 +193,7 @@ export const typescript = (options: TypescriptOptions = {}): Linter.Config[] => 
     languageOptions: {
       parser: parserTypescript,
       parserOptions: {
-        ecmaVersion: 'latest',
-        sourceType: 'module',
-        ecmaFeatures: {
-          jsx: true,
-        },
-        projectService: {
-          allowDefaultProject: ['./*.js'],
-        },
-        tsconfigRootDir: cwd(),
+        ...resolveTypescriptParserOptions(),
         ...parserOptions,
       } satisfies ParserOptions,
     },
