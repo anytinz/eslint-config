@@ -26,6 +26,7 @@ export const resolveNRules = (): Required<NRules> => ({
   'n/no-restricted-import': 'off',
   'n/no-restricted-require': 'off',
   'n/no-sync': 'error',
+  'n/no-top-level-await': 'off',
   'n/no-unpublished-bin': 'error',
   'n/no-unpublished-import': 'error',
   'n/no-unpublished-require': 'error',
