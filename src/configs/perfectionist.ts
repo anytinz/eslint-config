@@ -5,10 +5,11 @@ import type { PerfectionistRules } from '../types/rules/perfectionist'
 
 export const resolvePerfectionistRules = (): Required<PerfectionistRules> => ({
   'perfectionist/sort-array-includes': 'error',
-  'perfectionist/sort-astro-attributes': 'off',
   'perfectionist/sort-classes': 'off',
+  'perfectionist/sort-decorators': 'off',
   'perfectionist/sort-enums': 'off',
   'perfectionist/sort-exports': 'off',
+  'perfectionist/sort-heritage-clauses': 'off',
   'perfectionist/sort-imports': ['error', {
     newlinesBetween: 'never',
     groups: [
@@ -35,6 +36,7 @@ export const resolvePerfectionistRules = (): Required<PerfectionistRules> => ({
   'perfectionist/sort-intersection-types': 'off',
   'perfectionist/sort-jsx-props': 'off',
   'perfectionist/sort-maps': 'off',
+  'perfectionist/sort-modules': 'off',
   'perfectionist/sort-named-exports': 'off',
   'perfectionist/sort-named-imports': ['error', {
     groupKind: 'values-first',
@@ -42,11 +44,9 @@ export const resolvePerfectionistRules = (): Required<PerfectionistRules> => ({
   'perfectionist/sort-object-types': 'off',
   'perfectionist/sort-objects': 'off',
   'perfectionist/sort-sets': 'error',
-  'perfectionist/sort-svelte-attributes': 'off',
   'perfectionist/sort-switch-case': 'off',
   'perfectionist/sort-union-types': 'off',
   'perfectionist/sort-variable-declarations': 'off',
-  'perfectionist/sort-vue-attributes': 'off',
 })
 
 export type PerfectionistOptions = OverridesOptions<Partial<PerfectionistRules>>
