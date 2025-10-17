@@ -42,7 +42,7 @@
     "eslint-plugin-solid": "0.14.5",
     "eslint-plugin-tailwindcss": "3.18.2",
     "eslint-plugin-unicorn": "61.0.2",
-    "eslint-plugin-vue": "9.29.1",
+    "eslint-plugin-vue": "10.5.1",
     "globals": "16.4.0",
     "jsonc-eslint-parser": "2.4.1",
     "sort-package-json": "3.4.0",
