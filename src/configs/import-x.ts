@@ -1,3 +1,5 @@
+import { createTypeScriptImportResolver } from 'eslint-import-resolver-typescript'
+import { createNodeResolver } from 'eslint-plugin-import-x'
 import { GLOB_D_TS, GLOB_JS, GLOB_JSX, GLOB_TS, GLOB_TSX } from '../globs'
 import { extendsRuleOptions } from '../helpers/extends-rule-options'
 import { pluginImportX } from '../plugins.js'
@@ -57,6 +59,7 @@ export const resolveImportXRules = (): Required<ImportXRules> => ({
   'import/no-webpack-loader-syntax': 'error',
   'import/order': 'off',
   'import/prefer-default-export': 'off',
+  'import/prefer-namespace-import': 'off',
   'import/unambiguous': 'error',
 })
 
@@ -68,9 +71,13 @@ const TYPESCRIPT_EXTENSIONS_PATTERN = {
 } as const
 
 const extendsExtensionsRuleObjOptsForTs = (objOpts?: ImportExtensions[1]): NonNullable<ImportExtensions[1]> => {
-  return typeof objOpts?.pattern === 'object'
-    ? { ...objOpts, pattern: { ...objOpts.pattern, ...TYPESCRIPT_EXTENSIONS_PATTERN } }
-    : { ...objOpts, ...TYPESCRIPT_EXTENSIONS_PATTERN }
+  return {
+    ...objOpts,
+    pattern: {
+      ...typeof objOpts?.pattern === 'object' && objOpts.pattern,
+      ...TYPESCRIPT_EXTENSIONS_PATTERN,
+    },
+  }
 }
 
 const JS_EXTENSIONS = ['.js', '.cjs', '.mjs', '.jsx']
@@ -95,12 +102,12 @@ export const importX = (options: ImportXOptions = {}): Linter.Config[] => {
         'import-x/parsers': {
           '@typescript-eslint/parser': [...TS_EXTENSIONS],
         },
-        'import-x/resolver': {
-          node: {
+        'import-x/resolver-next': [
+          createNodeResolver({
             extensions: [...JS_EXTENSIONS, ...TS_EXTENSIONS],
-          },
-          typescript: true,
-        },
+          }),
+          createTypeScriptImportResolver(),
+        ],
       },
     },
     {
@@ -115,11 +122,14 @@ export const importX = (options: ImportXOptions = {}): Linter.Config[] => {
       name: 'anytinz/import-x/overrides/ts',
       files: [GLOB_TS, GLOB_TSX],
       rules: {
-        'import/extensions': extendsRuleOptions<ImportExtensions, ImportExtensions>(importXRules['import/extensions'], (...ruleOptions) => {
-          return typeof ruleOptions[0] === 'string'
-            ? [ruleOptions[0], extendsExtensionsRuleObjOptsForTs(ruleOptions[1])]
-            : [extendsExtensionsRuleObjOptsForTs(ruleOptions[0])]
-        }),
+        'import/extensions': extendsRuleOptions<ImportExtensions, ImportExtensions>(
+          importXRules['import/extensions'],
+          (...ruleOptions) => {
+            return typeof ruleOptions[0] === 'string'
+              ? [ruleOptions[0], extendsExtensionsRuleObjOptsForTs(ruleOptions[1])]
+              : [extendsExtensionsRuleObjOptsForTs(ruleOptions[0])]
+          },
+        ),
         'import/named': 'off',
       },
     },

@@ -16,7 +16,6 @@ const config = defineConfig({
     '@typescript-eslint/eslint-plugin',
     '@typescript-eslint/parser',
     'confusing-browser-globals',
-    'eslint-import-resolver-node',
     'eslint-import-resolver-typescript',
     'eslint-plugin-eslint-comments',
     'eslint-plugin-import-x',
