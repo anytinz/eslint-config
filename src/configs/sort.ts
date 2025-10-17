@@ -1,5 +1,5 @@
 import { sortPackageJson as _sortPackageJson } from 'sort-package-json'
-import type { Linter, Rule } from 'eslint'
+import type { Linter } from 'eslint'
 import type { RuleListener } from 'jsonc-eslint-parser'
 import type { JsoncRules } from '../types/rules/jsonc'
 
@@ -13,9 +13,13 @@ export const sortPackageJson = (): Linter.Config[] => [{
           meta: {
             fixable: 'code',
           },
-          create: (context): Rule.RuleListener => {
+          create: (context): RuleListener => {
             const ruleListener: RuleListener = {
               JSONExpressionStatement: (node) => {
+                if (!('text' in context.sourceCode)) {
+                  return
+                }
+
                 const { expression: { range } } = node
                 const json = context.sourceCode.text.slice(...range)
                 const sorted = _sortPackageJson(json)
@@ -28,7 +32,7 @@ export const sortPackageJson = (): Linter.Config[] => [{
                 }
               },
             }
-            return ruleListener as Rule.RuleListener
+            return ruleListener
           },
         },
       },

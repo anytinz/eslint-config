@@ -251,6 +251,7 @@ export const resolveJavascriptRules = (): Required<JavascriptRules> => ({
   'no-ternary': 'off',
   'no-this-before-super': 'error',
   'no-throw-literal': 'error',
+  'no-unassigned-vars': 'error',
   'no-undef': 'error',
   'no-undef-init': 'error',
   'no-undefined': 'off',
@@ -302,6 +303,7 @@ export const resolveJavascriptRules = (): Required<JavascriptRules> => ({
   'prefer-rest-params': 'error',
   'prefer-spread': 'error',
   'prefer-template': 'error',
+  'preserve-caught-error': 'error',
   radix: 'error',
   'require-atomic-updates': 'error',
   'require-await': 'error',
@@ -383,7 +385,6 @@ export const javascript = (options: JavascriptOptions = {}): Linter.Config[] => 
         'prefer-destructuring': 'off',
         'prefer-promise-reject-errors': 'off',
         'require-await': 'off',
-        'no-return-await': 'off',
       },
     },
   ]
