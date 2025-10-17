@@ -17,7 +17,14 @@ import type { TypescriptOptions } from './typescript'
 
 type VueRulesExtendsCore = Pick<VueRules, Extract<Exclude<keyof VueRules, 'vue/no-unused-vars'>, `vue/${keyof JavascriptRules}`>>
 type VueRulesExtendsStylistic = Pick<VueRules, (
-  | Extract<keyof VueRules, `vue/${RemovePrefix<keyof StylisticRules, 'style/'>}`>
+  | Extract<
+    keyof VueRules,
+    `vue/${(
+      | RemovePrefix<keyof StylisticRules, 'style/'>
+      // remove in `@stylistic/eslint-plugin@v5.0.0`
+      | 'func-call-spacing'
+    )}`
+  >
   | 'vue/html-comment-indent'
   | 'vue/html-indent'
   | 'vue/script-indent'
@@ -54,7 +61,7 @@ export const resolveVueRules = (): Required<VueRules> => {
     'vue/comma-spacing': stylisticRules['style/comma-spacing'],
     'vue/comma-style': stylisticRules['style/comma-style'],
     'vue/dot-location': stylisticRules['style/dot-location'],
-    'vue/func-call-spacing': stylisticRules['style/func-call-spacing'],
+    'vue/func-call-spacing': stylisticRules['style/function-call-spacing'],
     'vue/html-comment-indent': extendsRuleOptions(stylisticRules['style/indent'], (...[indent]) => [indent]),
     'vue/html-indent': extendsRuleOptions(stylisticRules['style/indent'], (...[indent]) => [indent]),
     'vue/key-spacing': stylisticRules['style/key-spacing'],
