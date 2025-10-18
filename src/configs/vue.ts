@@ -17,7 +17,14 @@ import type { TypescriptOptions } from './typescript'
 
 type VueRulesExtendsCore = Pick<VueRules, Extract<Exclude<keyof VueRules, 'vue/no-unused-vars'>, `vue/${keyof JavascriptRules}`>>
 type VueRulesExtendsStylistic = Pick<VueRules, (
-  | Extract<keyof VueRules, `vue/${RemovePrefix<keyof StylisticRules, 'style/'>}`>
+  | Extract<
+    keyof VueRules,
+    `vue/${(
+      | RemovePrefix<keyof StylisticRules, 'style/'>
+      // remove in `@stylistic/eslint-plugin@v5.0.0`
+      | 'func-call-spacing'
+    )}`
+  >
   | 'vue/html-comment-indent'
   | 'vue/html-indent'
   | 'vue/script-indent'
@@ -35,7 +42,9 @@ export const resolveVueRules = (): Required<VueRules> => {
     'vue/no-dupe-keys': javascriptRules['no-dupe-keys'],
     'vue/no-empty-pattern': javascriptRules['no-empty-pattern'],
     'vue/no-loss-of-precision': javascriptRules['no-loss-of-precision'],
+    'vue/no-implicit-coercion': javascriptRules['no-implicit-coercion'],
     'vue/no-irregular-whitespace': javascriptRules['no-irregular-whitespace'],
+    'vue/no-negated-condition': javascriptRules['no-negated-condition'],
     'vue/no-restricted-syntax': javascriptRules['no-restricted-syntax'],
     'vue/no-sparse-arrays': javascriptRules['no-sparse-arrays'],
     'vue/no-useless-concat': javascriptRules['no-useless-concat'],
@@ -54,7 +63,7 @@ export const resolveVueRules = (): Required<VueRules> => {
     'vue/comma-spacing': stylisticRules['style/comma-spacing'],
     'vue/comma-style': stylisticRules['style/comma-style'],
     'vue/dot-location': stylisticRules['style/dot-location'],
-    'vue/func-call-spacing': stylisticRules['style/func-call-spacing'],
+    'vue/func-call-spacing': stylisticRules['style/function-call-spacing'],
     'vue/html-comment-indent': extendsRuleOptions(stylisticRules['style/indent'], (...[indent]) => [indent]),
     'vue/html-indent': extendsRuleOptions(stylisticRules['style/indent'], (...[indent]) => [indent]),
     'vue/key-spacing': stylisticRules['style/key-spacing'],
@@ -96,7 +105,6 @@ export const resolveVueRules = (): Required<VueRules> => {
     'vue/component-definition-name-casing': 'error',
     'vue/component-name-in-template-casing': ['error', 'PascalCase', { registeredComponentsOnly: false }],
     'vue/component-options-name-casing': 'error',
-    'vue/component-tags-order': ['error', { order: ['script', 'template', 'style'] }],
     'vue/custom-event-name-casing': 'error',
     'vue/define-emits-declaration': 'error',
     'vue/define-macros-order': [
@@ -104,6 +112,9 @@ export const resolveVueRules = (): Required<VueRules> => {
       { order: ['defineOptions', 'defineSlots', 'defineProps', 'defineEmits'] },
     ],
     'vue/define-props-declaration': 'error',
+    'vue/define-props-destructuring': ['error', {
+      destructure: 'never',
+    }],
     'vue/enforce-style-attribute': 0,
     'vue/first-attribute-linebreak': ['error', { singleline: 'beside', multiline: 'below' }],
     'vue/html-button-has-type': 'error',
@@ -160,17 +171,17 @@ export const resolveVueRules = (): Required<VueRules> => {
     'vue/no-empty-component-block': 'error',
     'vue/no-export-in-script-setup': 'error',
     'vue/no-expose-after-await': 'error',
-    'vue/no-invalid-model-keys': 'off',
+    'vue/no-import-compiler-macros': 'error',
     'vue/no-lifecycle-after-await': 'error',
     'vue/no-lone-template': 'error',
     'vue/no-multiple-objects-in-class': 'error',
     'vue/no-multiple-slot-args': 'error',
     'vue/no-multiple-template-root': 'error',
     'vue/no-mutating-props': 'error',
+    'vue/no-negated-v-if-condition': 'error',
     'vue/no-parsing-error': 'error',
     'vue/no-potential-component-option-typo': 'error',
     'vue/no-ref-as-operand': 'error',
-    'vue/no-ref-object-destructure': 'off',
     'vue/no-ref-object-reactivity-loss': 'error',
     'vue/no-required-prop-with-default': 'error',
     'vue/no-reserved-component-names': 'off',
@@ -188,7 +199,6 @@ export const resolveVueRules = (): Required<VueRules> => {
     'vue/no-restricted-v-bind': 'off',
     'vue/no-restricted-v-on': 'off',
     'vue/no-root-v-if': 'error',
-    'vue/no-setup-props-destructure': 'off',
     'vue/no-setup-props-reactivity-loss': 'error',
     'vue/no-shared-component-data': 'error',
     'vue/no-side-effects-in-computed-properties': 'error',
@@ -230,6 +240,7 @@ export const resolveVueRules = (): Required<VueRules> => {
     'vue/prefer-prop-type-boolean-first': 'error',
     'vue/prefer-separate-static-class': 'off',
     'vue/prefer-true-attribute-shorthand': 'error',
+    'vue/prefer-use-template-ref': 'error',
     'vue/prop-name-casing': 'error',
     'vue/require-component-is': 'error',
     'vue/require-default-export': 'error',
@@ -251,10 +262,11 @@ export const resolveVueRules = (): Required<VueRules> => {
     'vue/require-typed-ref': 'error',
     'vue/require-v-for-key': 'error',
     'vue/require-valid-default-prop': 'error',
+    'vue/restricted-component-names': 'off',
     'vue/return-in-computed-property': 'error',
     'vue/return-in-emits-validator': 'error',
-    'vue/script-setup-uses-vars': 'off',
     'vue/singleline-html-element-content-newline': 'error',
+    'vue/slot-name-casing': 'error',
     'vue/static-class-names-order': 'off',
     'vue/this-in-template': 'error',
     'vue/use-v-on-exact': 'error',
@@ -262,7 +274,6 @@ export const resolveVueRules = (): Required<VueRules> => {
     'vue/v-for-delimiter-style': 'error',
     'vue/v-if-else-key': 'off',
     'vue/v-on-event-hyphenation': 'error',
-    'vue/v-on-function-call': 'off',
     'vue/v-on-handler-style': ['error', ['method', 'inline-function']],
     'vue/v-on-style': 'error',
     'vue/v-slot-style': 'error',

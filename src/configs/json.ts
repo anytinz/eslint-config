@@ -59,6 +59,7 @@ export const json = (options: JsonOptions = {}): Linter.Config[] => {
         '**/devcontainer.json',
       ],
       rules: {
+        // eslint-disable-next-line ts/no-unsafe-type-assertion
         ...pluginJsonc.configs['recommended-with-json'].rules as Linter.RulesRecord,
         ...overrides,
       },
@@ -72,6 +73,7 @@ export const json = (options: JsonOptions = {}): Linter.Config[] => {
         '**/devcontainer.json',
       ],
       rules: {
+        // eslint-disable-next-line ts/no-unsafe-type-assertion
         ...pluginJsonc.configs['recommended-with-jsonc'].rules as Linter.RulesRecord,
         ...overrides,
       },
@@ -80,6 +82,7 @@ export const json = (options: JsonOptions = {}): Linter.Config[] => {
       name: 'anytinz/json5/rules',
       files: [GLOB_JSON5],
       rules: {
+        // eslint-disable-next-line ts/no-unsafe-type-assertion
         ...pluginJsonc.configs['recommended-with-json5'].rules as Linter.RulesRecord,
         ...overrides,
       },

@@ -24,7 +24,21 @@ export const resolveTypescriptRules = (): Required<TypescriptRules> => {
     'ts/max-params': extendsRuleOptions(javascriptRules['max-params'], (...[ruleOptions]) => (typeof ruleOptions === 'number' ? [{ max: ruleOptions }] : [])),
     'ts/no-array-constructor': javascriptRules['no-array-constructor'],
     'ts/no-dupe-class-members': javascriptRules['no-dupe-class-members'],
-    'ts/no-empty-function': javascriptRules['no-empty-function'],
+    'ts/no-empty-function': extendsRuleOptions(
+      javascriptRules['no-empty-function'],
+      (...[ruleOptions]) => [{
+        ...ruleOptions,
+        allow: ruleOptions?.allow?.map((value) => {
+          if (value === 'privateConstructors') {
+            return 'private-constructors'
+          }
+          if (value === 'protectedConstructors') {
+            return 'protected-constructors'
+          }
+          return value
+        }),
+      }],
+    ),
     'ts/no-implied-eval': javascriptRules['no-implied-eval'],
     'ts/no-invalid-this': javascriptRules['no-invalid-this'],
     'ts/no-loop-func': javascriptRules['no-loop-func'],
@@ -44,7 +58,6 @@ export const resolveTypescriptRules = (): Required<TypescriptRules> => {
     'ts/prefer-destructuring': javascriptRules['prefer-destructuring'],
     'ts/prefer-promise-reject-errors': javascriptRules['prefer-promise-reject-errors'],
     'ts/require-await': javascriptRules['require-await'],
-    'ts/return-await': javascriptRules['no-return-await'],
   } as const satisfies Partial<TypescriptRules>
   const rules: Required<Omit<TypescriptRules, keyof typeof extensionRules>> = {
     'ts/adjacent-overload-signatures': 'error',
@@ -92,6 +105,7 @@ export const resolveTypescriptRules = (): Required<TypescriptRules> => {
     'ts/no-meaningless-void-operator': 'error',
     'ts/no-misused-new': 'error',
     'ts/no-misused-promises': 'error',
+    'ts/no-misused-spread': 'error',
     'ts/no-mixed-enums': 'error',
     'ts/no-namespace': 'error',
     'ts/no-non-null-asserted-nullish-coalescing': 'error',
@@ -110,6 +124,7 @@ export const resolveTypescriptRules = (): Required<TypescriptRules> => {
     'ts/no-unnecessary-type-arguments': 'error',
     'ts/no-unnecessary-type-assertion': 'error',
     'ts/no-unnecessary-type-constraint': 'error',
+    'ts/no-unnecessary-type-conversion': 'error',
     'ts/no-unnecessary-type-parameters': 'error',
     'ts/no-unsafe-argument': 'error',
     'ts/no-unsafe-assignment': 'error',
@@ -119,6 +134,7 @@ export const resolveTypescriptRules = (): Required<TypescriptRules> => {
     'ts/no-unsafe-function-type': 'error',
     'ts/no-unsafe-member-access': 'error',
     'ts/no-unsafe-return': 'error',
+    'ts/no-unsafe-type-assertion': 'error',
     'ts/no-unsafe-unary-minus': 'error',
     'ts/no-useless-empty-export': 'error',
     'ts/no-var-requires': 'error',
@@ -143,9 +159,11 @@ export const resolveTypescriptRules = (): Required<TypescriptRules> => {
     'ts/prefer-string-starts-ends-with': 'error',
     'ts/prefer-ts-expect-error': 'error',
     'ts/promise-function-async': 'error',
+    'ts/related-getter-setter-pairs': 'error',
     'ts/require-array-sort-compare': 'error',
     'ts/restrict-plus-operands': 'error',
     'ts/restrict-template-expressions': 'error',
+    'ts/return-await': 'error',
     'ts/sort-type-constituents': 'off',
     'ts/strict-boolean-expressions': 'error',
     'ts/switch-exhaustiveness-check': 'error',
