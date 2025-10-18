@@ -126,7 +126,9 @@ export const resolveStylisticRules = (): Required<StylisticRules> => ({
   }],
   'style/no-mixed-spaces-and-tabs': 'error',
   'style/no-multi-spaces': 'error',
-  'style/no-multiple-empty-lines': 'error',
+  'style/no-multiple-empty-lines': ['error', {
+    max: 1,
+  }],
   'style/no-tabs': 'error',
   'style/no-trailing-spaces': 'error',
   'style/no-whitespace-before-property': 'error',
