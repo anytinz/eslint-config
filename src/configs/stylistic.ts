@@ -102,6 +102,8 @@ export const resolveStylisticRules = (): Required<StylisticRules> => ({
     ignoreJSX: 'multi-line',
     ignoredNodes: [
       'ArrowFunctionExpression[body.type=ConditionalExpression]',
+      "*[typeAnnotation.type='TSIntersectionType']",
+      "*[typeAnnotation.type='TSUnionType']",
     ],
   }],
   'style/no-extra-semi': 'error',
