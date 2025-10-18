@@ -1,9 +1,18 @@
 import { pluginPerfectionist } from '../plugins.js'
 import type { Linter } from 'eslint'
-import type { OverridesOptions } from '../types/options'
+import type { MaybeArray } from '../helpers/type'
+import type { OverridesOptions, RulesOptions } from '../types/options'
 import type { PerfectionistRules } from '../types/rules/perfectionist'
 
-export const resolvePerfectionistRules = (): Required<PerfectionistRules> => ({
+type PerfectionistRulesOptions = {
+  sortImports?: {
+    internalPattern?: MaybeArray<{ pattern: string; flags?: string } | string>
+  }
+}
+
+export const resolvePerfectionistRules = (
+  options?: PerfectionistRulesOptions,
+): Required<PerfectionistRules> => ({
   'perfectionist/sort-array-includes': 'error',
   'perfectionist/sort-classes': 'off',
   'perfectionist/sort-decorators': 'off',
@@ -31,6 +40,8 @@ export const resolvePerfectionistRules = (): Required<PerfectionistRules> => ({
       'index-type',
       'unknown',
     ],
+    // An error will be thrown when the field is set to `undefined`, so give an empty array as the default value
+    internalPattern: options?.sortImports?.internalPattern ?? [],
   }],
   'perfectionist/sort-interfaces': 'off',
   'perfectionist/sort-intersection-types': 'off',
@@ -49,16 +60,16 @@ export const resolvePerfectionistRules = (): Required<PerfectionistRules> => ({
   'perfectionist/sort-variable-declarations': 'off',
 })
 
-export type PerfectionistOptions = OverridesOptions<Partial<PerfectionistRules>>
+export type PerfectionistOptions = OverridesOptions<Partial<PerfectionistRules>> & RulesOptions<PerfectionistRulesOptions>
 export const perfectionist = (options: PerfectionistOptions = {}): Linter.Config[] => {
-  const { overrides } = options
+  const { overrides, rules } = options
   return [{
     name: 'anytinz/perfectionist/rules',
     plugins: {
       perfectionist: pluginPerfectionist,
     },
     rules: {
-      ...resolvePerfectionistRules(),
+      ...resolvePerfectionistRules(rules),
       ...overrides,
     },
     settings: {

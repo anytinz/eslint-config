@@ -7,3 +7,7 @@ export type OverridesOptions<Rules extends Linter.RulesRecord> = {
 export type FilesOptions = {
   files?: string[]
 }
+
+export type RulesOptions<T extends object> = {
+  rules?: T
+}

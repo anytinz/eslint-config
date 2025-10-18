@@ -14,6 +14,7 @@ import { unicorn } from './configs/unicorn'
 import { vue } from './configs/vue'
 import { normalizeOptions } from './helpers/normalize-options'
 import type { Linter } from 'eslint'
+import type { PerfectionistOptions } from './configs/perfectionist'
 import type { SolidOptions } from './configs/solid'
 import type { TailwindcssOptions } from './configs/tailwindcss'
 import type { TypescriptOptions } from './configs/typescript'
@@ -38,6 +39,7 @@ const normalizeSortOptions = (options: SortOptions | boolean | undefined): Requi
 
 export type AnytinzOptions = {
   ingores?: string[]
+  perfectionist?: Omit<PerfectionistOptions, keyof OverridesOptions<never>>
   typescript?: Omit<TypescriptOptions, keyof OverridesOptions<never>> | boolean
   solid?: Omit<SolidOptions, keyof OverridesOptions<never>> | boolean
   vue?: Omit<VueOptions, keyof OverridesOptions<never>> | boolean
@@ -45,6 +47,7 @@ export type AnytinzOptions = {
   sort?: boolean | Partial<Record<'packageJson' | 'tsconfig', boolean>>
 }
 export const anytinz = (options: AnytinzOptions = {}, ...custom: Linter.Config[]): Linter.Config[] => {
+  const perfectionistOptions = normalizeOptions(options.perfectionist)
   const typescriptOptions = normalizeOptions(options.typescript ?? true)
   const solidOptions = normalizeOptions(options.solid)
   const vueOptions = normalizeOptions(options.vue)
@@ -57,7 +60,7 @@ export const anytinz = (options: AnytinzOptions = {}, ...custom: Linter.Config[]
     ...importX(),
     ...n(),
     ...unicorn(),
-    ...perfectionist(),
+    ...perfectionist(perfectionistOptions),
     ...stylistic(),
     ...json(),
   ]
