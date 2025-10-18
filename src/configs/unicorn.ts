@@ -6,7 +6,7 @@ import type { UnicornRules } from '../types/rules/unicorn'
 export const resolveUnicornRules = (): Required<UnicornRules> => ({
   'unicorn/better-regex': 'error',
   'unicorn/catch-error-name': ['error', {
-    ignore: ['error', 'exception'],
+    ignore: ['error', 'exception', 'cause'],
   }],
   'unicorn/consistent-assert': 'error',
   'unicorn/consistent-date-clone': 'error',
