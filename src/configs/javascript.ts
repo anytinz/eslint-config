@@ -332,7 +332,7 @@ export const javascript = (options: JavascriptOptions = {}): Linter.Config[] => 
         globals: {
           ...globals.browser,
           ...globals.node,
-          ...globals.es2025,
+          ...globals.es2026,
           document: 'readonly',
           navigator: 'readonly',
           window: 'readonly',
