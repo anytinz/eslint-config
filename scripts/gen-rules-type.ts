@@ -1,8 +1,7 @@
 import { writeFile } from 'node:fs/promises'
 import { kebabCase } from 'change-case'
-// eslint-disable-next-line import/no-deprecated
-import { builtinRules } from 'eslint/use-at-your-own-risk'
 import { pluginsToRulesDTS } from 'eslint-typegen/core'
+import { builtinRules } from 'eslint/use-at-your-own-risk'
 import {
   pluginEslintComments,
   pluginImportX,
@@ -24,7 +23,7 @@ type PluginRecord = {
   prefix: string
 }
 const pluginRecords: PluginRecord[] = [
-  // eslint-disable-next-line ts/no-deprecated, import/no-deprecated
+  // eslint-disable-next-line ts/no-deprecated
   { plugin: { rules: Object.fromEntries(builtinRules) }, name: 'JavascriptPrimitive', prefix: '' },
   { plugin: pluginEslintComments, name: 'EslintComments', prefix: 'eslint-comments' },
   { plugin: pluginImportX, name: 'ImportX', prefix: 'import' },
