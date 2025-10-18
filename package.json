@@ -29,7 +29,7 @@
     "test:type": "tsc --noEmit"
   },
   "dependencies": {
-    "@stylistic/eslint-plugin": "5.4.0",
+    "@stylistic/eslint-plugin": "5.5.0",
     "@typescript-eslint/eslint-plugin": "8.46.1",
     "@typescript-eslint/parser": "8.46.1",
     "confusing-browser-globals": "1.0.11",
@@ -60,7 +60,7 @@
     "eslint": "9.38.0",
     "eslint-typegen": "2.3.0",
     "rimraf": "6.0.1",
-    "rollup": "4.52.4",
+    "rollup": "4.52.5",
     "typescript": "5.9.3"
   },
   "peerDependencies": {
