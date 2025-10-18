@@ -4,10 +4,15 @@ import { GLOB_D_TS, GLOB_JS, GLOB_JSX, GLOB_TS, GLOB_TSX } from '../globs'
 import { extendsRuleOptions } from '../helpers/extends-rule-options'
 import { pluginImportX } from '../plugins.js'
 import type { Linter } from 'eslint'
-import type { OverridesOptions } from '../types/options'
+import type { OverridesOptions, RulesOptions } from '../types/options'
 import type { ImportExtensions, ImportXRules } from '../types/rules/import-x'
 
-export const resolveImportXRules = (): Required<ImportXRules> => ({
+type ImportXRulesOptions = {
+  noUnresolved?: {
+    ignore?: [string, ...string[]]
+  }
+}
+export const resolveImportXRules = (options?: ImportXRulesOptions): Required<ImportXRules> => ({
   'import/consistent-type-specifier-style': ['error', 'prefer-top-level'],
   'import/default': 'error',
   'import/dynamic-import-chunkname': 'off',
@@ -53,6 +58,7 @@ export const resolveImportXRules = (): Required<ImportXRules> => ({
     commonjs: true,
     amd: true,
     caseSensitiveStrict: true,
+    ignore: options?.noUnresolved?.ignore,
   }],
   'import/no-unused-modules': 'off',
   'import/no-useless-path-segments': ['error', { commonjs: true }],
@@ -82,10 +88,10 @@ const extendsExtensionsRuleObjOptsForTs = (objOpts?: ImportExtensions[1]): NonNu
 
 const JS_EXTENSIONS = ['.js', '.cjs', '.mjs', '.jsx']
 const TS_EXTENSIONS = ['.ts', '.cts', '.mts', '.tsx']
-export type ImportXOptions = OverridesOptions<Partial<ImportXRules>>
+export type ImportXOptions = OverridesOptions<Partial<ImportXRules>> & RulesOptions<ImportXRulesOptions>
 export const importX = (options: ImportXOptions = {}): Linter.Config[] => {
-  const { overrides } = options
-  const importXRules = resolveImportXRules()
+  const { overrides, rules } = options
+  const importXRules = resolveImportXRules(rules)
   return [
     {
       name: 'anytinz/import-x/rules',
