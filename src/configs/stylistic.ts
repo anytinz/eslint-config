@@ -1,9 +1,13 @@
 import { pluginStylistic } from '../plugins.js'
 import type { Linter } from 'eslint'
+import type { Except } from 'type-fest'
 import type { OverridesOptions } from '../types/options'
 import type { StylisticRules } from '../types/rules/stylistic'
 
-export const resolveStylisticRules = (): Required<StylisticRules> => ({
+export const resolveStylisticRules = (): Required<
+  // ingore experimental rules
+  Except<StylisticRules, 'style/exp-list-style'>
+> => ({
   'style/array-bracket-newline': ['error', 'consistent'],
   'style/array-bracket-spacing': 'error',
   'style/array-element-newline': 'off',
