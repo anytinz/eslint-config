@@ -29,6 +29,7 @@ const config = defineConfig({
     'globals',
     'jsonc-eslint-parser',
     'sort-package-json',
+    'type-fest',
     'vue-eslint-parser',
   ],
 })

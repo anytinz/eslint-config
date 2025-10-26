@@ -1,5 +1,6 @@
 import parserJsonc from 'jsonc-eslint-parser'
 import { GLOB_JSON, GLOB_JSON5, GLOB_JSONC } from '../globs'
+import { extendsRuleOptions } from '../helpers/extends-rule-options'
 import { pluginJsonc } from '../plugins.js'
 import { resolveStylisticRules } from './stylistic'
 import type { Linter } from 'eslint'
@@ -26,7 +27,26 @@ export const resolveJsonStylisticRules = (): Required<JsoncStylisticRules> => {
     'jsonc/array-bracket-spacing': stylisticRules['style/array-bracket-spacing'],
     'jsonc/array-element-newline': stylisticRules['style/array-element-newline'],
     'jsonc/comma-style': stylisticRules['style/comma-style'],
-    'jsonc/indent': stylisticRules['style/indent'],
+    'jsonc/indent': extendsRuleOptions(
+      stylisticRules['style/indent'],
+      (
+        ...[
+          indent,
+          {
+            offsetTernaryExpressions,
+            ...ruleOptions
+          } = {},
+        ]
+      ) => {
+        return [
+          indent,
+          {
+            ...ruleOptions,
+            offsetTernaryExpressions: typeof offsetTernaryExpressions === 'object' || offsetTernaryExpressions,
+          },
+        ]
+      },
+    ),
     'jsonc/key-spacing': stylisticRules['style/key-spacing'],
     'jsonc/object-curly-newline': stylisticRules['style/object-curly-newline'],
     'jsonc/object-curly-spacing': stylisticRules['style/object-curly-spacing'],
